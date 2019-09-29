@@ -20,14 +20,14 @@ sudo apt install php7.2 libapache2-mod-php7.2 php7.2-mbstring php7.2-xmlrpc php7
 
 Edit:
 sudo vi /etc/php/7.2/apache2/php.ini
-  memory_limit = 256M\
-  upload_max_filesize = 64M\
+  memory_limit = 256M
+  upload_max_filesize = 64M
   cgi.fix_pathinfo=0
 
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 
 cd /var/www/html
-  sudo composer create-project laravel/laravel collabo --prefer-dist\
+sudo composer create-project laravel/laravel collabo --prefer-dist
 
 ### Set permissions for the project
 Change the permissions recursevly to www-data\
