@@ -7,9 +7,9 @@ In the this documentation the following terms are used as placeholder:
 
 
 ## Setup an Ubuntu server 18.10 VM
-#Install an Ubuntu server on a VM or something of a kind
-sudo apt-get update
-sudo apt-get upgrade
+Install an Ubuntu server on a VM or something of a kind
+  sudo apt-get update
+  sudo apt-get upgrade
 
 
 ## Install Laravel
@@ -29,13 +29,13 @@ curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/loca
 cd /var/www/html
 sudo composer create-project laravel/laravel <PROJECT> --prefer-dist
 
-#Set permissions for the project
-#Change the permissions recursevly to www-data
-sudo chown -R www-data:www-data /var/www/html/<PROJECT>/
-sudo chmod -R 755 /var/www/html/PROJECT/
-#add your user ) to the group www-data
-sudo usermod -G www-data -a <USER>
-sudo chmod -R g+rwx /var/www/html/<PROJECT>/
+Set permissions for the project
+Change the permissions recursevly to www-data
+  sudo chown -R www-data:www-data /var/www/html/<PROJECT>/
+  sudo chmod -R 755 /var/www/html/PROJECT/
+add your user ) to the group www-data
+  sudo usermod -G www-data -a <USER>
+  sudo chmod -R g+rwx /var/www/html/<PROJECT>/
 
 #You have to log-out and in again to modify files in Tryout
 
@@ -59,9 +59,9 @@ sudo vi /etc/apache2/sites-available/laravel.conf
      CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 
-#Enable laravel.conf as site
-sudo a2ensite laravel.conf
-sudo a2enmod rewrite
+Enable laravel.conf as site
+  sudo a2ensite laravel.conf
+  sudo a2enmod rewrite
 
 
 sudo vi /etc/hosts
