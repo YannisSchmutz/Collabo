@@ -31,11 +31,11 @@ cd /var/www/html
 
 ### Set permissions for the project
 Change the permissions recursevly to www-data\
-  sudo chown -R www-data:www-data /var/www/html/Collabo/
-  sudo chmod -R 755 /var/www/html/Collabo/
+  sudo chown -R www-data:www-data /var/www/html/collabo/
+  sudo chmod -R 755 /var/www/html/collabo/
 Add your user ) to the group www-data
   sudo usermod -G www-data -a <USER>
-  sudo chmod -R g+rwx /var/www/html/Collabo/
+  sudo chmod -R g+rwx /var/www/html/collabo/
 
 #You have to log-out and in again to modify files in Tryout
 
@@ -44,10 +44,10 @@ sudo vi /etc/apache2/sites-available/laravel.conf
 
 <VirtualHost *:80>
   ServerAdmin yannisvalentin.schmutz@students.bfh.ch
-     DocumentRoot /var/www/html/Collabo/public
+     DocumentRoot /var/www/html/collabo/public
      ServerName localhost
 
-     <Directory /var/www/html/Collabo/public>
+     <Directory /var/www/html/collabo/public>
         Options +FollowSymlinks
         AllowOverride All
         Require all granted
@@ -83,13 +83,13 @@ Tools -> Deployment -> Configuration -> + -> "collabo"
   * Host:       VM-IP
   * User:       VM-User
   * PW:         VM-PW
-  * Root-path:  /var/www/html/Collabo
+  * Root-path:  /var/www/html/collabo
   
 Make sure the User you've specified has the permissions to read and write files on the remote server!
 
 Upload a files to the server
   * select a file
-  * Tools -> Deployment -> Upload to Collabo
+  * Tools -> Deployment -> Upload to collabo
 
 
 !!! After you've uploaded a new file, you have to change its permissions on the remote machine!!!
