@@ -1,0 +1,28 @@
+@startuml
+title User roles
+
+actor "Admin" as admin
+actor "User" as user
+actor "Project Owner" as po
+actor "Collaborator" as collaborator
+actor "Developer" as dev
+actor "Designer" as designer
+actor "Business" as business
+
+
+note left of user
+    Several actors might have different
+    roles.
+
+    So a Developer might also be a PO.
+
+    -> ActorRole-Pattern?
+end note
+
+
+po -up-|> user
+collaborator -up-|> user
+dev -up-|> collaborator
+designer -up-|> collaborator
+business -up-|> collaborator
+@enduml
