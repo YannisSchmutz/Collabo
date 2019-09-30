@@ -1,0 +1,11 @@
+@startuml
+title ProjectOwner UseCases
+
+rectangle Collabo {
+    usecase "Create Project" as create_project
+    usecase "Like collaborator" as like_collaborator
+    usecase "Define needed skills for a project"
+}
+
+
+@enduml

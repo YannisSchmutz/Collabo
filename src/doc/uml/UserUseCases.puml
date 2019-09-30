@@ -1,0 +1,34 @@
+@startuml
+
+title User UseCases
+
+rectangle Collabo{
+    usecase "Create account" as create_account
+    usecase "Confirm/verify account" as confirm_account
+    usecase "Send mail" as send_mail
+    usecase "Delete account" as delete_account
+    usecase "Login" as login
+    usecase "Logout" as logout
+    usecase "Change language" as change_language
+    usecase "Reset password" as reset_pw
+
+
+    usecase "Select role(s)" as select_role
+    usecase "Select skills" as select_skills
+
+    create_account .up.> select_role : <<implement>>
+    create_account .up.> select_skills : <<implement>>
+
+    delete_account .up.> create_account : <<extend>>
+    login .up.> create_account : <<extend>>
+    logout .up.> login : <<extend>>
+    reset_pw .up.> create_account : <<extend>>
+
+    create_account .right.> confirm_account : <<implement>>
+    confirm_account .down.> send_mail : <<implement>>
+
+    reset_pw ..> send_mail : <<implement>>
+
+}
+
+@enduml

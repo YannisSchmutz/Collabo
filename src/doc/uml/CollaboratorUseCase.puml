@@ -1,0 +1,9 @@
+@startuml
+title Collaborator UseCases
+
+rectangle Collabo {
+    usecase "See/search projects"
+    usecase "Like Project" as like_project
+}
+
+@enduml
