@@ -118,4 +118,4 @@ Create and start containers (add -d as parameter to run containers in the backgr
     docker-compose up
 
 Install vendor folder:
-    docker-compose exec php compose install
+    docker-compose exec php composer install
