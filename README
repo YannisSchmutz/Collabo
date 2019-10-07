@@ -103,7 +103,19 @@ Upload a files to the server
 
 
 
-Restart appache
+Restart apache
   * sudo systemctl stop apache2.service
   * sudo systemctl enable apache2.service
   * sudo systemctl start apache2.service
+
+
+Docker stuff
+------------
+Build container:
+    docker-compose build
+
+Create and start containers (add -d as parameter to run containers in the background):
+    docker-compose up
+
+Install vendor folder:
+    docker-compose exec php composer install
