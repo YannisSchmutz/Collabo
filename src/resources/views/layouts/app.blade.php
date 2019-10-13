@@ -8,14 +8,21 @@
         <title>{{config('app.name', 'Collabo')}}</title>
     </head>
     <body>
-        <header>
+        <header id="top">
             @include('components.navbar')
         </header>
-        <div class="container">
-            @yield('content')
-        </div>
-        <footer>
-
+        <main role="main" class="container">
+                @yield('content')
+        </main>
+        <footer class="text-muted text-light bg-dark align-baseline">
+            <div class="container">
+                <div class="row">
+                    <p class="col-6">&copy; by {{config('app.name', 'Collabo')}}</p>
+                    <p class="col-6">
+                        <a href="#top" class="float-right">Zurück nach oben</a>
+                    </p>
+                </div>
+            </div>
         </footer>
         <script src="{{ asset('js/app.js') }}"></script>
     </body>
