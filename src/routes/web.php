@@ -15,8 +15,14 @@
 //    return view('index');
 //});
 
-Route::get('/', 'PagesController@index');
+Route::get ('/', 'PagesController@index');
+Route::get('/home', 'PagesController@index');
+Route::get('/profile', 'PagesController@index')->name('profile');
+Route::get('/projects', 'PagesController@index')->name('projects');
+Route::get('/swipe', 'PagesController@index')->name('swipe');
+Route::get('/community', 'PagesController@index')->name('community');
+Route::get('/inbox', 'PagesController@index')->name('inbox');
+Route::get('/settings', 'PagesController@index')->name('settings');
 
 Auth::routes();
 
-Route::get('/profile', 'ProfileController@index');
