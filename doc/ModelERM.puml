@@ -1,0 +1,34 @@
+@startuml
+
+entity "User" as user{
+    --
+    * Name
+    * Surname
+    * Email
+    * Password
+    * Pitch-text
+    * Profile-image
+    * Top-3-skills
+}
+
+entity "Project" as project{
+    --
+    * Title
+    * Pitch-text
+    * Description
+    * Images
+}
+
+entity "Skill" as skill{
+    --
+    * Kind
+    * Level (newbie,\nprofessional,\nwizard)
+
+}
+
+user ||--o{ project : owns
+user }o--o{ project : collaborates
+
+user }o-right-|{ skill : has
+project }|-|{ skill : requires
+@enduml
