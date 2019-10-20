@@ -1,34 +1,76 @@
 @startuml
+!define pk(x) <u>x</u>
 
 entity "User" as user{
+    * pk(uid)
     --
     * Name
     * Surname
     * Email
-    * Password
-    * Pitch-text
-    * Profile-image
-    * Top-3-skills
+    * PW-Hash
+    * Pitch
+    * Description
 }
 
 entity "Project" as project{
+    * pk(pid)
     --
-    * Title
-    * Pitch-text
+    * OwnedBy
+    * Name
+    * Pitch
     * Description
-    * Images
 }
 
-entity "Skill" as skill{
+entity "Like" as like{
+    * pk(uid)
+    * pk(pid)
     --
-    * Kind
-    * Level (newbie,\nprofessional,\nwizard)
-
+    * ulike
+    * plike
 }
 
-user ||--o{ project : owns
-user }o--o{ project : collaborates
+entity "UserProject" as user_project {
+    * pk(uid)
+    * pk(pid)
+    --
+    * Permission
+}
 
-user }o-right-|{ skill : has
-project }|-|{ skill : requires
+entity "Interest" as interest{
+    * pk(sid)
+    --
+    * Name
+}
+
+entity "UserInterest" as user_interest{
+    * pk(uid)
+    * pk(sid)
+    --
+    * Skill_level
+}
+
+entity "ProjectInterest" as project_interest{
+    * pk(pid)
+    * pk(sid)
+    --
+    * Skill_level
+}
+
+entity "Setting" as setting{
+}
+
+user ||--|| setting
+user ||-right-o{ project : owns
+user ||-right-o{ user_project
+
+project ||-left-o{ user_project
+
+user ||-up-o{ like
+project ||-up-o{ like
+
+user ||-down-o{ user_interest
+user_interest }o-right-|| interest
+
+project ||--o{ project_interest
+project_interest }o-left-|| interest
 @enduml
