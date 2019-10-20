@@ -1,7 +1,7 @@
 @startuml
 !define pk(x) <u>x</u>
 
-entity "User" as user{
+entity "Users" as user{
     * pk(uid)
     --
     * Name
@@ -12,7 +12,7 @@ entity "User" as user{
     * Description
 }
 
-entity "Project" as project{
+entity "Projects" as project{
     * pk(pid)
     --
     * OwnedBy
@@ -21,7 +21,7 @@ entity "Project" as project{
     * Description
 }
 
-entity "Like" as like{
+entity "Likes (users_projects)" as like{
     * pk(uid)
     * pk(pid)
     --
@@ -29,34 +29,34 @@ entity "Like" as like{
     * plike
 }
 
-entity "UserProject" as user_project {
+entity "Users_Projects" as user_project {
     * pk(uid)
     * pk(pid)
     --
     * Permission
 }
 
-entity "Interest" as interest{
+entity "Interests" as interest{
     * pk(sid)
     --
     * Name
 }
 
-entity "UserInterest" as user_interest{
+entity "Users_Interests" as user_interest{
     * pk(uid)
     * pk(sid)
     --
     * Skill_level
 }
 
-entity "ProjectInterest" as project_interest{
+entity "Projects_Interests" as project_interest{
     * pk(pid)
     * pk(sid)
     --
     * Skill_level
 }
 
-entity "Setting" as setting{
+entity "Settings" as setting{
 }
 
 user ||--|| setting
