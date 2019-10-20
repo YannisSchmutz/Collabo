@@ -21,7 +21,7 @@ entity "Projects" as project{
     * Description
 }
 
-entity "Likes (users_projects)" as like{
+entity "Likes" as like{
     * pk(user_id)
     * pk(project_id)
     --
