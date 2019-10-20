@@ -36,4 +36,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function ownedProjects(){
+        return $this->hasMany('App\Project', 'owner_key');
+    }
+
+    public function interests(){
+        // Play around in tinker:
+        // $user = App\User::find(1);
+        // $user->interests;
+        // $user->interests[0]->pivot->skill_level;
+
+        return $this->belongsToMany('App\Interest', 'users_interests')
+            ->using('App\UserInterest')
+            ->withPivot('skill_level');
+    }
 }
