@@ -58,4 +58,8 @@ class User extends Authenticatable
             ->using('App\UserProject')
             ->withPivot('permission');
     }
+
+    public function likes(){
+        return $this->hasMany('App\Like');
+    }
 }

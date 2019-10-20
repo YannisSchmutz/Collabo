@@ -20,4 +20,8 @@ class Project extends Model
             ->using('App\UserProject')
             ->withPivot('permission');
     }
+
+    public function likes() {
+        return $this->hasMany('App\Like');
+    }
 }

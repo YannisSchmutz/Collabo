@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersProjectsTable extends Migration
+class CreateLikesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateUsersProjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('users_projects', function (Blueprint $table) {
+        Schema::create('likes', function (Blueprint $table) {
             $table->integer('user_id');
             $table->integer('project_id');
             // Use the natural composite key as primary (user_id, project_id)
             $table->primary(['user_id', 'project_id']);
 
-            // TODO: Use own table for permissions eventually..?
-            $table->enum('permission',
-                ['readonly', 'reporter', 'manager', 'owner'])->default('readonly');
+            $table->boolean('liked_by_user');
+            $table->boolean('liked_by_project');
+
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ class CreateUsersProjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_projects');
+        Schema::dropIfExists('likes');
     }
 }
