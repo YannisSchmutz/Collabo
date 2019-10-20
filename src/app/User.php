@@ -37,10 +37,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    //public function ownedProjects(){
-    //    return $this->hasMany('App\Project', 'owner_id', 'id');
-    //}
-
     public function interests(){
         /* Play around in tinker:
             $user = App\User::find(1);
