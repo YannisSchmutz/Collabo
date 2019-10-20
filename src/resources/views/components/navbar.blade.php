@@ -58,7 +58,7 @@
             </ul>
         </div>
             <div class="col-sm">
-                <ul class="navbar-nav mr-auto">
+                <ul class="navbar-nav border-left float-right">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('welcome', ['locale' => 'en']) }}">{{ __('EN') }}</a>
                     </li>
