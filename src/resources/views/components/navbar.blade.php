@@ -3,9 +3,10 @@
     <div class="container">
         <a class="navbar-brand" href="#">{{config('app.name', 'Collabo')}}</a>
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#nav" aria-controls="nav" aria-expanded="false">
-            <span class="navbar-toggler-icon" />
+            <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="nav">
+        <div class="row collapse navbar-collapse" id="nav">
+            <div class="col-lg">
             <ul class="navbar-nav mr-auto">
                 <!-- Authentication Links -->
                 @guest
@@ -56,5 +57,17 @@
                 @endguest
             </ul>
         </div>
+            <div class="col-sm">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('welcome', ['locale' => 'en']) }}">{{ __('EN') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('welcome', ['locale' => 'de']) }}">{{ __('DE') }}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
     </div>
 </nav>
