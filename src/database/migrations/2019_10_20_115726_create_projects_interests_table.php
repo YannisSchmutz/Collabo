@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersInterestsTable extends Migration
+class CreateProjectsInterestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateUsersInterestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('users_interests', function (Blueprint $table) {
+        Schema::create('projects_interests', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('interest_id');
-            $table->integer('user_id');
+            $table->integer('project_id');
             // TODO: User the natural composite key as primary (user_id, interest_id)
-            //$table->index(['user_id', 'interest_id']);
-            $table->integer('skill_level');
+            //$table->index(['project_id', 'interest_id']);
+            //$table->integer('skill_level');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateUsersInterestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_interests');
+        Schema::dropIfExists('projects_interests');
     }
 }

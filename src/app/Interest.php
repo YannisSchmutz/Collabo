@@ -11,4 +11,10 @@ class Interest extends Model
             ->using('App\UserInterest')
             ->withPivot('skill_level');
     }
+
+    public function projects(){
+        return $this->belongsToMany('App\Project', 'projects_interests')
+            ->using('App\ProjectInterest')
+            ->withPivot('skill_level');
+    }
 }

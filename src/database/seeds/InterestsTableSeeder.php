@@ -24,5 +24,6 @@ class InterestsTableSeeder extends Seeder
         DB::table('interests')->insert(['name' => 'Boxing']);
         DB::table('interests')->insert(['name' => 'Politics']);
         DB::table('interests')->insert(['name' => 'Cosplay']);
+        DB::table('interests')->insert(['name' => 'Machine Learning']);
     }
 }

@@ -38,14 +38,15 @@ class User extends Authenticatable
     ];
 
     public function ownedProjects(){
-        return $this->hasMany('App\Project', 'owner_key');
+        return $this->hasMany('App\Project', 'owner_id', 'id');
     }
 
     public function interests(){
-        // Play around in tinker:
-        // $user = App\User::find(1);
-        // $user->interests;
-        // $user->interests[0]->pivot->skill_level;
+        /* Play around in tinker:
+            $user = App\User::find(1);
+            $user->interests;
+            $user->interests[0]->pivot->skill_level;
+        */
 
         return $this->belongsToMany('App\Interest', 'users_interests')
             ->using('App\UserInterest')
