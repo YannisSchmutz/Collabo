@@ -14,11 +14,11 @@ class CreateUsersProjectsTable extends Migration
     public function up()
     {
         Schema::create('users_projects', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            // TODO: User the natural composite key as primary (user_id, project_id)
-            //$table->index(['user_id', 'project_id']);
             $table->integer('user_id');
             $table->integer('project_id');
+            // Use the natural composite key as primary (user_id, project_id)
+            $table->index(['user_id', 'project_id']);
+
             // TODO: Use own table for permissions eventually..?
             $table->enum('permission',
                 ['readonly', 'reporter', 'manager', 'owner'])->default('readonly');

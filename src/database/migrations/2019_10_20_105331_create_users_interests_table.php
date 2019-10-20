@@ -14,11 +14,10 @@ class CreateUsersInterestsTable extends Migration
     public function up()
     {
         Schema::create('users_interests', function (Blueprint $table) {
-            $table->bigIncrements('id');
             $table->integer('interest_id');
             $table->integer('user_id');
-            // TODO: User the natural composite key as primary (user_id, interest_id)
-            //$table->index(['user_id', 'interest_id']);
+            // Use the natural composite key as primary (user_id, interest_id)
+            $table->primary(['user_id', 'interest_id']);
             $table->integer('skill_level')->default(1);
             $table->timestamps();
         });
