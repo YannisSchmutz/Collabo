@@ -19,7 +19,6 @@ class CreateProjectsInterestsTable extends Migration
             $table->integer('project_id');
             // TODO: User the natural composite key as primary (user_id, interest_id)
             //$table->index(['project_id', 'interest_id']);
-            //$table->integer('skill_level');
             $table->timestamps();
         });
     }

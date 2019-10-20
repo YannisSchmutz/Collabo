@@ -37,19 +37,29 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function ownedProjects(){
-        return $this->hasMany('App\Project', 'owner_id', 'id');
-    }
+    //public function ownedProjects(){
+    //    return $this->hasMany('App\Project', 'owner_id', 'id');
+    //}
 
     public function interests(){
         /* Play around in tinker:
             $user = App\User::find(1);
             $user->interests;
-            $user->interests[0]->pivot->skill_level;
         */
 
         return $this->belongsToMany('App\Interest', 'users_interests')
             ->using('App\UserInterest')
             ->withPivot('skill_level');
+    }
+
+    public function projects(){
+        /* Play around with tinker:
+            $user->projects;
+            $user->projects[0];
+            $user->projects[0]->pivot->permission;
+         */
+        return $this->belongsToMany('App\Project', 'users_projects')
+            ->using('App\UserProject')
+            ->withPivot('permission');
     }
 }

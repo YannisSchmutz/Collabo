@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
-    public function ownedBy(){
-        return $this->belongsTo('App\User', 'owner_id', 'id');
-    }
+    //public function ownedBy(){
+    //    return $this->belongsTo('App\User', 'owner_id', 'id');
+    //}
 
     public function interests() {
         /* Play around in tinker:
@@ -17,6 +17,11 @@ class Project extends Model
         */
         return $this->belongsToMany('App\Interest', 'projects_interests')
             ->using('App\ProjectInterest');
-            //->withPivot('skill_level');
+    }
+
+    public function users(){
+        return $this->belongsToMany('App\User', 'users_projects')
+            ->using('App\UserProject')
+            ->withPivot('permission');
     }
 }

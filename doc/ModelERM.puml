@@ -2,7 +2,7 @@
 !define pk(x) <u>x</u>
 
 entity "Users" as user{
-    * pk(uid)
+    * pk(id)
     --
     * Name
     * Surname
@@ -13,7 +13,7 @@ entity "Users" as user{
 }
 
 entity "Projects" as project{
-    * pk(pid)
+    * pk(id)
     --
     * OwnedBy
     * Name
@@ -22,36 +22,36 @@ entity "Projects" as project{
 }
 
 entity "Likes (users_projects)" as like{
-    * pk(uid)
-    * pk(pid)
+    * pk(user_id)
+    * pk(project_id)
     --
     * ulike
     * plike
 }
 
 entity "Users_Projects" as user_project {
-    * pk(uid)
-    * pk(pid)
+    * pk(user_id)
+    * pk(project_id)
     --
     * Permission
 }
 
 entity "Interests" as interest{
-    * pk(sid)
+    * pk(id)
     --
     * Name
 }
 
 entity "Users_Interests" as user_interest{
-    * pk(uid)
-    * pk(sid)
+    * pk(user_id)
+    * pk(interest_id)
     --
     * Skill_level
 }
 
 entity "Projects_Interests" as project_interest{
-    * pk(pid)
-    * pk(sid)
+    * pk(project_id)
+    * pk(interest_id)
     --
     * Skill_level
 }
@@ -59,8 +59,7 @@ entity "Projects_Interests" as project_interest{
 entity "Settings" as setting{
 }
 
-user ||--|| setting
-user ||-right-o{ project : owns
+user ||-left-|| setting
 user ||-right-o{ user_project
 
 project ||-left-o{ user_project

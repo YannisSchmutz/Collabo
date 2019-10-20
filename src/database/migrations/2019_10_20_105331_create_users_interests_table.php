@@ -19,7 +19,7 @@ class CreateUsersInterestsTable extends Migration
             $table->integer('user_id');
             // TODO: User the natural composite key as primary (user_id, interest_id)
             //$table->index(['user_id', 'interest_id']);
-            $table->integer('skill_level');
+            $table->integer('skill_level')->default(1);
             $table->timestamps();
         });
     }

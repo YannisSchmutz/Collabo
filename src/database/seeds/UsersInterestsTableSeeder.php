@@ -17,64 +17,52 @@ class UsersInterestsTableSeeder extends Seeder
         DB::table('users_interests')->insert([
             'user_id' => 1,
             'interest_id' => 1,
-            'skill_level' => 3,
         ]);
         DB::table('users_interests')->insert([
             'user_id' => 1,
             'interest_id' => 4,
-            'skill_level' => 1,
         ]);
         DB::table('users_interests')->insert([
             'user_id' => 1,
             'interest_id' => 5,
-            'skill_level' => 2,
         ]);
         DB::table('users_interests')->insert([
             'user_id' => 1,
             'interest_id' => 11,
-            'skill_level' => 3,
         ]);
 
         DB::table('users_interests')->insert([
             'user_id' => 2,
             'interest_id' => 2,
-            'skill_level' => 3,
         ]);
         DB::table('users_interests')->insert([
             'user_id' => 2,
             'interest_id' => 4,
-            'skill_level' => 1,
         ]);
         DB::table('users_interests')->insert([
             'user_id' => 2,
             'interest_id' => 5,
-            'skill_level' => 2,
         ]);
         DB::table('users_interests')->insert([
             'user_id' => 2,
             'interest_id' => 12,
-            'skill_level' => 3,
         ]);
 
         DB::table('users_interests')->insert([
             'user_id' => 3,
             'interest_id' => 3,
-            'skill_level' => 3,
         ]);
         DB::table('users_interests')->insert([
             'user_id' => 3,
             'interest_id' => 4,
-            'skill_level' => 2,
         ]);
         DB::table('users_interests')->insert([
             'user_id' => 3,
             'interest_id' => 5,
-            'skill_level' => 2,
         ]);
         DB::table('users_interests')->insert([
             'user_id' => 3,
             'interest_id' => 13,
-            'skill_level' => 3,
         ]);
     }
 }
