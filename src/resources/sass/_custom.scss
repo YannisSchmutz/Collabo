@@ -5,3 +5,10 @@ main{
 footer{
     padding: 10px 0 0 0;
 }
+
+.thumb-post img {
+    object-fit: none; /* Do not scale the image */
+    object-position: center; /* Center the image within the element */
+    width: 100%;
+    margin-bottom: 1rem;
+}
