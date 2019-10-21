@@ -18,21 +18,14 @@
                 <h1>{{$data->getFirstname()}} {{$data->getLastname()}}</h1>
                 <p>{{$data->getCaption()}}</p>
             </div>
-            <div class="jumbotron">
-                <h3>My Interests</h3>
-                @foreach ($data->getInterests() as $interest)
-                    <span class="badge badge-info">{{$interest}}</span>
+            @component('components/interestbox', ['data' =>$data->getInterests()])
+            My Interests
+            @endcomponent
 
-                @endforeach
-            </div>
-            <div class="jumbotron">
-                <h3>My Projects</h3>
-                <ul>
-                    @foreach ($data->getProjects() as $project )
-                        <li>{{$project}}</li>
-                    @endforeach
-                </ul>
-            </div>
+            @component('components/projectlist', ['data' =>$data->getProjects()])
+            My Projects
+            @endcomponent
+
         </div>
     </div>
 </div>
