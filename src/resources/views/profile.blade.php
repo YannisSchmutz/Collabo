@@ -19,7 +19,7 @@
                 <p>{{$data->getCaption()}}</p>
             </div>
             @component('components/interestbox', ['data' =>$data->getInterests()])
-            My Interests
+
             @endcomponent
 
             @component('components/projectlist', ['data' =>$data->getProjects()])

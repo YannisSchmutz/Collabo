@@ -1,8 +1,8 @@
 <div class="jumbotron">
     <h3>{{$slot}}</h3>
-    <ul>
+    <ul class="list-group">
         @foreach ($data as $project )
-        <li>{{$project}}</li>
+        <li class="list-group-item">{{$project}}</li>
         @endforeach
     </ul>
 </div>
