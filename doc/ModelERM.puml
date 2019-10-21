@@ -1,0 +1,75 @@
+@startuml
+!define pk(x) <u>x</u>
+
+entity "Users" as user{
+    * pk(id)
+    --
+    * Name
+    * Surname
+    * Email
+    * PW-Hash
+    * Pitch
+    * Description
+}
+
+entity "Projects" as project{
+    * pk(id)
+    --
+    * OwnedBy
+    * Name
+    * Pitch
+    * Description
+}
+
+entity "Likes" as like{
+    * pk(user_id)
+    * pk(project_id)
+    --
+    * ulike
+    * plike
+}
+
+entity "Users_Projects" as user_project {
+    * pk(user_id)
+    * pk(project_id)
+    --
+    * Permission
+}
+
+entity "Interests" as interest{
+    * pk(id)
+    --
+    * Name
+}
+
+entity "Users_Interests" as user_interest{
+    * pk(user_id)
+    * pk(interest_id)
+    --
+    * Skill_level
+}
+
+entity "Projects_Interests" as project_interest{
+    * pk(project_id)
+    * pk(interest_id)
+    --
+    * Skill_level
+}
+
+entity "Settings" as setting{
+}
+
+user ||-left-|| setting
+user ||-right-o{ user_project
+
+project ||-left-o{ user_project
+
+user ||-up-o{ like
+project ||-up-o{ like
+
+user ||-down-o{ user_interest
+user_interest }o-right-|| interest
+
+project ||--o{ project_interest
+project_interest }o-left-|| interest
+@enduml
