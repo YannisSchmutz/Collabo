@@ -63,7 +63,7 @@
                         <a class="nav-link" href="{{ route('welcome', ['locale' => 'en']) }}">{{ __('EN') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('welcome', ['locale' => 'de']) }}">{{ __('DE') }}</a>
+                        <a class="nav-link" href="{{ route('welcome', ['locale' => 'DE']) }}">{{ __('DE') }}</a>
                     </li>
                 </ul>
             </div>
