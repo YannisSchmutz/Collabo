@@ -18,7 +18,7 @@
 Route::get ('/', 'PagesController@index');
 Route::get('home', 'PagesController@index');
 Route::get('profile', 'PagesController@profile')->name('profile');
-Route::get('projects', 'PagesController@index')->name('projects');
+Route::get('projects', 'PagesController@projects')->name('projects');
 Route::get('swipe', 'PagesController@index')->name('swipe');
 Route::get('community', 'PagesController@index')->name('community');
 Route::get('inbox', 'PagesController@index')->name('inbox');
