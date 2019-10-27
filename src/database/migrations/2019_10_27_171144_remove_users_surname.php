@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddCollaboAttributesToUsersTable extends Migration
+class RemoveUsersSurname extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,7 @@ class AddCollaboAttributesToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('surname');
-            $table->mediumText('pitch');
-            $table->longText('description');
+            $table->dropColumn('surname');
         });
     }
 
@@ -28,9 +26,7 @@ class AddCollaboAttributesToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('surname');
-            $table->dropColumn('pitch');
-            $table->dropColumn('description');
+            $table->string('surname');
         });
     }
 }

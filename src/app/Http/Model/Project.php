@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Http\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,17 +11,17 @@ class Project extends Model
             $project = App\Project::find(1);
             $project->interests;
         */
-        return $this->belongsToMany('App\Interest', 'projects_interests')
+        return $this->belongsToMany('App\Http\Model\Interest', 'projects_interests')
             ->using('App\ProjectInterest');
     }
 
     public function users(){
-        return $this->belongsToMany('App\User', 'users_projects')
-            ->using('App\UserProject')
+        return $this->belongsToMany('App\Http\Model\User', 'users_projects')
+            ->using('App\Http\Model\UserProject')
             ->withPivot('permission');
     }
 
     public function likes() {
-        return $this->hasMany('App\Like');
+        return $this->hasMany('App\Http\Model\Like');
     }
 }
