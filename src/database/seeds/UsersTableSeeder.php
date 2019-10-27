@@ -13,24 +13,21 @@ class UsersTableSeeder extends Seeder
     {
         // TODO: Add timestamps
         DB::table('users')->insert([
-            'name' => 'Yannis',
-            'surname' => 'Schmutz',
+            'name' => 'Yannis Schmutz',
             'email' => 'yannis@schmutz.com',
             'password' => bcrypt('12345678'),
             'pitch' => 'Yannis pitch',
             'description' => 'Yannis description',
         ]);
         DB::table('users')->insert([
-            'name' => 'Gian',
-            'surname' => 'Demarmels',
+            'name' => 'Gian Demarmels',
             'email' => 'gian@demarmels.com',
             'password' => bcrypt('12345678'),
             'pitch' => 'Gian pitch',
             'description' => 'Gian description',
         ]);
         DB::table('users')->insert([
-            'name' => 'Kevin',
-            'surname' => 'Riesen',
+            'name' => 'Kevin Riesen',
             'email' => 'kevin@riesen.com',
             'password' => bcrypt('12345678'),
             'pitch' => 'Kevin pitch',

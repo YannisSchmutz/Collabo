@@ -15,7 +15,7 @@
         </div>
         <div class="col-md-9">
             <div class="jumbotron">
-                <h1>{{$data->getFirstname()}} {{$data->getLastname()}}</h1>
+                <h1>{{$data->getName()}}</h1>
                 <p>{{$data->getCaption()}}</p>
             </div>
             @component('components/interestbox', ['data' =>$data->getInterests()])

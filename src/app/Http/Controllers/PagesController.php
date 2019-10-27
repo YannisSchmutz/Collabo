@@ -18,8 +18,7 @@ class PagesController extends Controller
     {
         $profileViewmodel = new ProfileViewmodel();
         $profileViewmodel->setPitch('I am an awesome person! I love Blockchains, serverless computing and all other Buzzwordy Stuff!');
-        $profileViewmodel->setFirstname('Melanie');
-        $profileViewmodel->setLastname('Müller');
+        $profileViewmodel->setName('Melanie Müller');
         $profileViewmodel->setCaption('Cyber Enthusiast | Blockchain Engineer');
         $profileViewmodel->setInterests(['Blockchain', 'Security', 'Python']);
         $profileViewmodel->setPicPath('/profile.jpg');
