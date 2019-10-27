@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Collabo') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -26,7 +26,7 @@
     <main role="main" class="container">
         @yield('content')
     </main>
-    <footer class="text-muted text-light bg-dark align-baseline">
+    <footer class="text-muted text-light bg-dark fixed-bottom">
         <div class="container">
             <div class="row">
                 <p class="col-6">&copy; by {{config('app.name', 'Collabo')}}</p>
