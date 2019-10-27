@@ -8,6 +8,6 @@ return [
     |--------------------------------------------------------------------------
     |
     */
-    'intereststitle' => 'My Interests',
-    'projectststitle' => 'My Projects',
+    'interests_title' => 'My Interests',
+    'projectsts_title' => 'My Projects',
 ];

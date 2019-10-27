@@ -13,11 +13,11 @@
             @endcomponent
 
             @component('components/interestbox', ['data' =>$data->getInterests()])
-                    @lang('profiletext.intereststitle')
+                    @lang('profiletext.interests_title')
             @endcomponent
 
             @component('components/projectlist', ['data' =>$data->getProjects()])
-                    @lang('profiletext.projectststitle')
+                    @lang('profiletext.projectsts_title')
             @endcomponent
         </div>
         <?php echo App::getLocale(); ?>
