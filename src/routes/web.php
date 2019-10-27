@@ -17,6 +17,8 @@
 
 Route::get ('/', 'PagesController@index');
 Route::get('home', 'PagesController@index');
+Route::get('profile', 'PagesController@profile')->name('profile');
+Route::get('projects', 'PagesController@projects')->name('projects');
 Route::get('profile', 'ProfileController@index')->name('profile');
 Route::post('profile/editCaption', 'ProfileController@editCaption');
 Route::post('profile/editPitchbox', 'ProfileController@editPitchbox');
