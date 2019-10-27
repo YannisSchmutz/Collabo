@@ -6,45 +6,27 @@ namespace App\Http\ViewModel;
 
 class ProfileViewmodel
 {
-    private $firstname;
-    private $lastname;
+    private $name;
     private $caption;
     private $picPath;
     private $pitch;
     private $interests;
     private $projects;
 
-
     /**
      * @return mixed
      */
-    public function getFirstname()
+    public function getName()
     {
-        return $this->firstname;
+        return $this->name;
     }
 
     /**
-     * @param mixed $firstname
+     * @param mixed $name
      */
-    public function setFirstname($firstname): void
+    public function setName($name): void
     {
-        $this->firstname = $firstname;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLastname()
-    {
-        return $this->lastname;
-    }
-
-    /**
-     * @param mixed $lastname
-     */
-    public function setLastname($lastname): void
-    {
-        $this->lastname = $lastname;
+        $this->name = $name;
     }
 
     /**

@@ -9,4 +9,6 @@
             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
         </p>
     </div>
+    <?php echo App::getLocale(); ?>
+
 @endsection
