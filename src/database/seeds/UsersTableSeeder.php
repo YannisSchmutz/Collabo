@@ -18,6 +18,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('12345678'),
             'pitch' => 'Yannis pitch',
             'description' => 'Yannis description',
+            'profile_picture' => 'pictures/yannis.jpg',
         ]);
         DB::table('users')->insert([
             'name' => 'Gian Demarmels',
@@ -25,6 +26,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('12345678'),
             'pitch' => 'Gian pitch',
             'description' => 'Gian description',
+            'profile_picture' => 'pictures/gian.png',
         ]);
         DB::table('users')->insert([
             'name' => 'Kevin Riesen',
@@ -32,6 +34,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('12345678'),
             'pitch' => 'Kevin pitch',
             'description' => 'Kevin description',
+            'profile_picture' => 'pictures/kevin.png',
         ]);
     }
 }

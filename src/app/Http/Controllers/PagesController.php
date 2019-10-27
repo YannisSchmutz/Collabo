@@ -21,7 +21,7 @@ class PagesController extends Controller
         $profileViewmodel->setName('Melanie Müller');
         $profileViewmodel->setCaption('Cyber Enthusiast | Blockchain Engineer');
         $profileViewmodel->setInterests(['Blockchain', 'Security', 'Python']);
-        $profileViewmodel->setPicPath('/profile.jpg');
+        $profileViewmodel->setPicPath('pictures/portrait_placeholder.png');
         $profileViewmodel->setProjects(['Proj1', 'Proj2']);
 
         return view('profile')->with(['data' => $profileViewmodel]);

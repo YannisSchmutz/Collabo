@@ -1,7 +1,7 @@
 <li class="list-group-item container">
     <div class="row">
         <div class="col-sm-2">
-            <img src="/profile.jpg" alt="{{$project->name}}" class="img-thumbnail img-fluid" />
+            <img src="{{$project->project_picture}}" alt="{{$project->name}}" class="img-thumbnail img-fluid" />
         </div>
         <div class="col-sm">
             <h5 class="m-0">{{$project->name}}</h5>
