@@ -3,7 +3,14 @@
     <div class="card-body">
         <ul class="list-group">
             @foreach ($data as $project )
-            <li class="list-group-item">{{$project}}</li>
+            <li class="list-group-item">
+                {{$project}}
+                <div class="float-right">
+                    <i class="fas fa-eye ml-2"></i> |
+                    <i class="fas fa-edit ml-2"></i> |
+                    <i class="fas fa-trash ml-2"></i>
+                </div>
+            </li>
             @endforeach
         </ul>
     </div>

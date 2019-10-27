@@ -18,6 +18,8 @@
 Route::get ('/', 'PagesController@index');
 Route::get('home', 'PagesController@index');
 Route::get('profile', 'ProfileController@index')->name('profile');
+Route::post('profile/editCaption', 'ProfileController@editCaption');
+Route::post('profile/editPitchbox', 'ProfileController@editPitchbox');
 Route::get('projects', 'PagesController@index')->name('projects');
 Route::get('swipe', 'PagesController@index')->name('swipe');
 Route::get('community', 'PagesController@index')->name('community');

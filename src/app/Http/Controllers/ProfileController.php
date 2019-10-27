@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\ViewModel\ProfileViewmodel;
+use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
@@ -32,5 +33,14 @@ class ProfileController extends Controller
         $profileViewmodel->setProjects(['Proj1', 'Proj2']);
 
         return view('profile')->with(['data' => $profileViewmodel]);
+    }
+
+    public function editPitchbox(Request $request)
+    {
+        return redirect('profile');
+    }
+
+    public function editCaption(Request $request){
+        return redirect('profile');
     }
 }
