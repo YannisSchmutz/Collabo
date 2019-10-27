@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Like extends Model
 {
     // Table name
-    protected $table = "likes";
+    protected $table = 'likes';
 
     public function users(){
         return $this->belongsTo('AppHttp\Model\\User');
