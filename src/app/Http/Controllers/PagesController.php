@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Http\Model\User;
 
 use App\Http\ViewModel\ProfileViewmodel;
 use App\Http\ViewModel\ProjectsViewModel;

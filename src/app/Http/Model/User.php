@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Http\Model;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -43,8 +43,8 @@ class User extends Authenticatable
             $user->interests;
         */
 
-        return $this->belongsToMany('App\Interest', 'users_interests')
-            ->using('App\UserInterest')
+        return $this->belongsToMany('App\Http\Model\Interest', 'users_interests')
+            ->using('App\Http\Model\UserInterest')
             ->withPivot('skill_level');
     }
 
@@ -54,12 +54,12 @@ class User extends Authenticatable
             $user->projects[0];
             $user->projects[0]->pivot->permission;
          */
-        return $this->belongsToMany('App\Project', 'users_projects')
-            ->using('App\UserProject')
+        return $this->belongsToMany('App\Http\Model\Project', 'users_projects')
+            ->using('App\Http\Model\UserProject')
             ->withPivot('permission');
     }
 
     public function likes(){
-        return $this->hasMany('App\Like');
+        return $this->hasMany('App\Http\Model\Like');
     }
 }

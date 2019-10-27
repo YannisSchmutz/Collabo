@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Http\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,10 +10,10 @@ class Like extends Model
     protected $table = "likes";
 
     public function users(){
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('AppHttp\Model\\User');
     }
 
     public function projects(){
-        return $this->belongsTo('App\Project');
+        return $this->belongsTo('App\Http\Model\Project');
     }
 }
