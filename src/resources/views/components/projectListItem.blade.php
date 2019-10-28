@@ -7,10 +7,11 @@
             <h5 class="m-0">{{$project->name}}</h5>
             <small>{{$project->pitch}}</small>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-3">
             <ul class="float-right navbar-nav">
                 <li class="nav-item">
-                    <a href="#" class="btn btn-primary">{{ __('edit') }}</a>
+                    <a href="/projects/{{$project->id}}/detail" class="btn btn-primary">{{ __('detail') }}</a>
+                    <a href="#" class="btn btn-secondary">{{ __('edit') }}</a>
                     <a href="#" class="btn btn-danger">{{ __('leave') }}</a>
                 </li>
             </ul>
