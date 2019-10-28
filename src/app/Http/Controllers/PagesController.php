@@ -13,23 +13,4 @@ class PagesController extends Controller
         $title = 'Welcome to Collabo!';
         return view('pages.index')->with('title', $title);
     }
-
-    public function projects(){
-
-        $ownedProjects = [];
-        $relatedProjects = [];
-        foreach(auth()->user()->projects as $project){
-            if($project->pivot->permission == 'owner') {
-                array_push ( $ownedProjects, $project);
-            }else {
-                array_push ( $relatedProjects, $project);
-            }
-        }
-
-        $projectsViewmodel = new ProjectsViewModel();
-        $projectsViewmodel->setOwnedProjects($ownedProjects);
-        $projectsViewmodel->setRelatedProjects($relatedProjects);
-
-        return view('pages.projects')->with(['data' => $projectsViewmodel]);
-    }
 }

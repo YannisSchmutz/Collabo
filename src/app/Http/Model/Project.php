@@ -12,7 +12,7 @@ class Project extends Model
             $project->interests;
         */
         return $this->belongsToMany('App\Http\Model\Interest', 'projects_interests')
-            ->using('App\ProjectInterest');
+            ->using('App\Http\Model\ProjectInterest');
     }
 
     public function users(){
