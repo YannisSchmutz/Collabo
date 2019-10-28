@@ -8,7 +8,7 @@ return [
     |--------------------------------------------------------------------------
     |
     */
-    'myProjects' => 'Meine Projekte',
+    'my_projects' => 'Meine Projekte',
     'related_projects' => 'Zugehörige Projekte',
     'interests_title' => 'Projekt Interessen',
     'description_title' => 'Projekt Beschreibung',
