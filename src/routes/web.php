@@ -24,8 +24,11 @@ Route::get('projects/{id}/detail', 'ProjectsController@detail');
 Route::get('profile', 'ProfileController@index')->name('profile');
 Route::post('profile/editCaption', 'ProfileController@editCaption');
 Route::post('profile/editPitchbox', 'ProfileController@editPitchbox');
+// ***** Community *****
+Route::get('community', 'CommunityController@index')->name('community');
+Route::get('searchProject', 'CommunityController@searchProject')->name('community');
+
 Route::get('swipe', 'PagesController@index')->name('swipe');
-Route::get('community', 'PagesController@index')->name('community');
 Route::get('inbox', 'PagesController@index')->name('inbox');
 Route::get('settings', 'PagesController@index')->name('settings');
 
