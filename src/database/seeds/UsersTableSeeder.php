@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
         // TODO: Add timestamps
         DB::table('users')->insert([
             'name' => 'Yannis Schmutz',
-            'caption' => 'ML|Python|Boxing',
+            'caption' => 'ML | Python | Boxing',
             'email' => 'yannis@schmutz.com',
             'password' => bcrypt('12345678'),
             'pitch' => 'Yannis pitch',
@@ -23,7 +23,7 @@ class UsersTableSeeder extends Seeder
         ]);
         DB::table('users')->insert([
             'name' => 'Gian Demarmels',
-            'caption' => 'Security|F#|Fönkschönöl progrämming',
+            'caption' => 'Security | F# | Fönkschönöl progrämming',
             'email' => 'gian@demarmels.com',
             'password' => bcrypt('12345678'),
             'pitch' => 'Gian pitch',
@@ -32,7 +32,7 @@ class UsersTableSeeder extends Seeder
         ]);
         DB::table('users')->insert([
             'name' => 'Kevin Riesen',
-            'caption' => 'VR|Gaming',
+            'caption' => 'VR | Gaming',
             'email' => 'kevin@riesen.com',
             'password' => bcrypt('12345678'),
             'pitch' => 'Kevin pitch',
