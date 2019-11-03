@@ -4,7 +4,7 @@
     <p class="card-text p-2">{{$slot}}</p>
     <button type="button" class="ml-2 mr-2 btn btn-primary">Collab!</button>
 </div>
-<form action="/profile/editPitchbox" method="post" class="hiddenForm" id="pitchboxForm">
+<form action="/{{$urlPath}}/editPitchbox" method="post" class="hiddenForm" id="pitchboxForm">
     @csrf
     <div class="form-group">
         <label for="profilepic">@lang('profiletext.pic_form')</label>

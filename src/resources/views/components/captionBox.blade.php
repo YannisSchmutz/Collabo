@@ -4,7 +4,7 @@
     <h1 class="display-4">{{$title}}</h1>
     <h3 >{{$caption}}</h3>
 </div>
-<form action="/profile/editCaption" method="post" class="hiddenForm" id="captionForm">
+<form action="/{{$urlPath}}/editCaption" method="post" class="hiddenForm" id="captionForm">
     @csrf
     <div class="form-group">
         <label for="fullname">@lang('profiletext.fullname_form')</label>
