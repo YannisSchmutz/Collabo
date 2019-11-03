@@ -8,11 +8,11 @@
     @csrf
     <div class="form-group">
         <label for="profilepic">@lang('profiletext.pic_form')</label>
-        <input type="file" class="form-control" id="profilepic">
+        <input type="file" class="form-control" id="profilepic" name="profilepic">
     </div>
     <div class="form-group">
         <label for="pitch">@lang('profiletext.pitch_form')</label>
-        <input type="text" class="form-control" id="pitch" value="{{$slot}}">
+        <input type="text" class="form-control" id="pitch" value="{{$slot}}" name="pitch">
     </div>
     <button type="submit" class="btn btn-primary">@lang('profiletext.submit')</button>
 </form>

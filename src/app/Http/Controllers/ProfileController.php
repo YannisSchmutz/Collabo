@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\ViewModel\ProfileViewmodel;
 use Illuminate\Http\Request;
 
+
 class ProfileController extends Controller
 {
     /**
@@ -38,7 +39,6 @@ class ProfileController extends Controller
             array_push($project_names, $project->name);
         }
 
-
         $profileViewmodel = new ProfileViewmodel();
         $profileViewmodel->setPitch($user->pitch);
         $profileViewmodel->setName($user->name);
@@ -52,10 +52,30 @@ class ProfileController extends Controller
 
     public function editPitchbox(Request $request)
     {
+        $this->validate($request, [
+            'pitch' => 'required',
+            'profilepic' => 'optional'
+        ]);
+        $user = auth()->user();
+        // TODO: Be able to upload and save an image.
+        $user->pitch = $request->pitch;
+        $user->save();
+
         return redirect('profile');
+        //return $request->all();
     }
 
     public function editCaption(Request $request){
+
+        // Send error-message to frontend if this fails
+        $this->validate($request, [
+            'fullname' => 'required',
+            'caption' => 'required'
+        ]);
+        $user = auth()->user();
+        $user->caption = $request->caption;
+        $user->name = $request->fullname;
+        $user->save();
         return redirect('profile');
     }
 }
