@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-3">
-            @component('components/pitchbox', ['picPath' =>$data->getPicPath()])
+            @component('components/pitchBox', ['picPath' =>$data->getPicPath()])
                 {{$data->getPitch()}}
             @endcomponent
         </div>
@@ -12,11 +12,11 @@
             @component('components/captionBox', ['title' =>$data->getName(), 'caption' => $data->getCaption()])
             @endcomponent
 
-            @component('components/interestbox', ['data' =>$data->getInterests()])
+            @component('components/interestBox', ['data' =>$data->getInterests()])
                     @lang('profiletext.interests_title')
             @endcomponent
 
-            @component('components/projectlist', ['data' =>$data->getProjects()])
+            @component('components/projectList', ['data' =>$data->getProjects()])
                     @lang('profiletext.projectsts_title')
             @endcomponent
         </div>
