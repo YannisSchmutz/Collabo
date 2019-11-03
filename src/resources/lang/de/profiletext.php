@@ -11,9 +11,8 @@ return [
     'interests_title' => 'Meine Interessen',
     'projectsts_title' => 'Meine Projekte',
     'fullname_form' => 'Name:',
-    'caption_form' => 'Untertitel',
+    'caption_form' => 'Profil-Slogan:',
     'pitch_form' => 'Pitch:',
     'pic_form' => 'Profile Picture:',
-    'submit' => 'Speichern',
-
+    'interests_placeholder' => 'Benutzer Interessen hinzufügen...',
 ];

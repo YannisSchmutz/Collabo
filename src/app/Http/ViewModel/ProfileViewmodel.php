@@ -10,7 +10,8 @@ class ProfileViewmodel
     private $caption;
     private $picPath;
     private $pitch;
-    private $interests;
+    private $userInterests;
+    private $possibleInterestsToAdd;
     private $projects;
 
     /**
@@ -80,17 +81,33 @@ class ProfileViewmodel
     /**
      * @return mixed
      */
-    public function getInterests()
+    public function getUserInterests()
     {
-        return $this->interests;
+        return $this->userInterests;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPossibleInterestsToAdd()
+    {
+        return $this->possibleInterestsToAdd;
     }
 
     /**
      * @param mixed $interests
      */
-    public function setInterests($interests): void
+    public function setUserInterests($interests): void
     {
-        $this->interests = $interests;
+        $this->userInterests = $interests;
+    }
+
+    /**
+     * @param mixed $interests
+     */
+    public function setPossibleInterestsToAdd($interests): void
+    {
+        $this->possibleInterestsToAdd = $interests;
     }
 
     /**

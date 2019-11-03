@@ -4,23 +4,27 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-3">
-            @component('components/pitchbox', ['picPath' =>$data->getPicPath()])
+            @component('components/pitchBox', ['picPath' =>$data->getPicPath(), 'urlPath' =>Request::path(),
+                                               'langFile' => 'profiletext'])
                 {{$data->getPitch()}}
             @endcomponent
         </div>
         <div class="col-md-9">
-            @component('components/captionBox', ['title' =>$data->getName(), 'caption' => $data->getCaption()])
+            @component('components/captionBox', ['title' =>$data->getName(), 'caption' => $data->getCaption(),
+                                                 'urlPath' =>Request::path(), 'langFile' => 'profiletext'])
             @endcomponent
 
-            @component('components/interestbox', ['data' =>$data->getInterests()])
+            @component('components/interestBox', ['interestsToDisplay' =>$data->getUserInterests(),
+                                                  'possibleInterestsToAdd' =>$data->getPossibleInterestsToAdd(),
+                                                  'urlPath' =>Request::path(),
+                                                  'langFile' => 'profiletext'])
                     @lang('profiletext.interests_title')
             @endcomponent
 
-            @component('components/projectlist', ['data' =>$data->getProjects()])
+            @component('components/projectList', ['data' =>$data->getProjects()])
                     @lang('profiletext.projectsts_title')
             @endcomponent
         </div>
-        <?php echo App::getLocale(); ?>
     </div>
 </div>
 @endsection
