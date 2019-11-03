@@ -52,6 +52,7 @@ class ProfileController extends Controller
 
     public function editPitchbox(Request $request)
     {
+        //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
             'pitch' => 'required',
             'profilepic' => 'optional'
@@ -67,7 +68,7 @@ class ProfileController extends Controller
 
     public function editCaption(Request $request){
 
-        // Send error-message to frontend if this fails
+        //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
             'fullname' => 'required',
             'caption' => 'required'

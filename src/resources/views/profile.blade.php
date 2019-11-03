@@ -4,12 +4,14 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-3">
-            @component('components/pitchBox', ['picPath' =>$data->getPicPath(), 'urlPath' =>Request::path()])
+            @component('components/pitchBox', ['picPath' =>$data->getPicPath(), 'urlPath' =>Request::path(),
+                                               'langFile' => 'profiletext'])
                 {{$data->getPitch()}}
             @endcomponent
         </div>
         <div class="col-md-9">
-            @component('components/captionBox', ['title' =>$data->getName(), 'caption' => $data->getCaption(), 'urlPath' =>Request::path()])
+            @component('components/captionBox', ['title' =>$data->getName(), 'caption' => $data->getCaption(),
+                                                 'urlPath' =>Request::path(), 'langFile' => 'profiletext'])
             @endcomponent
 
             @component('components/interestBox', ['data' =>$data->getInterests()])
@@ -20,8 +22,6 @@
                     @lang('profiletext.projectsts_title')
             @endcomponent
         </div>
-        <?php echo App::getLocale(); ?>
-        <?php echo Request::path(); ?>
     </div>
 </div>
 @endsection
