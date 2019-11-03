@@ -16,5 +16,6 @@ return [
     'caption_form' => 'Project caption:',
     'pitch_form' => 'Pitch:',
     'pic_form' => 'Project picture:',
+    'interests_placeholder' => 'Project interests to add...',
 
 ];

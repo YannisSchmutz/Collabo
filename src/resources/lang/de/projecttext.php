@@ -16,5 +16,6 @@ return [
     'caption_form' => 'Projekt-Slogan:',
     'pitch_form' => 'Pitch:',
     'pic_form' => 'Projekt Bild:',
+    'interests_placeholder' => 'Projekt Interessen hinzufügen...',
 
 ];
