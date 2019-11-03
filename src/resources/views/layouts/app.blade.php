@@ -40,30 +40,6 @@
         </div>
     </footer>
     <script src="{{ asset('js/app.js') }}"></script>
-    <script>
-        $(document).ready(function(){
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            $('#projectSearch').keyup(function(){
-                let searchterm = $('#projectSearch').val();
-                if(searchterm.length == 0){
-                    $("#projectSearchResults").html("");
-                }else{
-                    $.get(
-                        "{{ URL::to('searchProject') }}",
-                        {searchterm:searchterm},
-                        function(result){
-                            if($('#projectSearch').val() != result.searchterm){ return; }
-                            $("#projectSearchResults").empty().html(result.html);
-                        }
-                    )
-                }
-            });
-        });
-    </script>
+    @yield('js-import')
 </body>
 </html>
