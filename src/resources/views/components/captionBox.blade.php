@@ -8,7 +8,7 @@
     @csrf
     <div class="form-group">
         <label for="fullname">@lang('profiletext.fullname_form')</label>
-        <input type="text" class="form-control" id="caption" value="{{$title}}">
+        <input type="text" class="form-control" id="fullname" value="{{$title}}">
     </div>
     <div class="form-group">
         <label for="caption">@lang('profiletext.caption_form')</label>

@@ -11,8 +11,8 @@
         <input type="file" class="form-control" id="profilepic">
     </div>
     <div class="form-group">
-        <label for="caption">@lang('profiletext.pitch_form')</label>
-        <input type="text" class="form-control" id="caption" value="{{$slot}}">
+        <label for="pitch">@lang('profiletext.pitch_form')</label>
+        <input type="text" class="form-control" id="pitch" value="{{$slot}}">
     </div>
     <button type="submit" class="btn btn-primary">@lang('profiletext.submit')</button>
 </form>
