@@ -15,7 +15,9 @@
                                                      'urlPath' =>Request::path(), 'langFile' => 'projecttext'])
                 @endcomponent
 
-                @component('components/interestBox', ['data' =>$data->getInterests()])
+                @component('components/interestBox', ['interestsToDisplay' =>$data->getProjectInterests(),
+                                                      'possibleInterestsToAdd' =>$data->getPossibleInterestsToAdd(),
+                                                      'urlPath' =>Request::path()])
                     @lang('projecttext.interests_title')
                 @endcomponent
 

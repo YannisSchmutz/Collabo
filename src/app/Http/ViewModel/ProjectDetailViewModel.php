@@ -11,7 +11,8 @@ class ProjectDetailViewModel
     private $picPath;
     private $pitch;
     private $description;
-    private $interests;
+    private $projectInterests;
+    private $possibleInterestsToAdd;
 
     /**
      * @return mixed
@@ -96,17 +97,33 @@ class ProjectDetailViewModel
     /**
      * @return mixed
      */
-    public function getInterests()
+    public function getProjectInterests()
     {
-        return $this->interests;
+        return $this->projectInterests;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPossibleInterestsToAdd()
+    {
+        return $this->possibleInterestsToAdd;
     }
 
     /**
      * @param mixed $interests
      */
-    public function setInterests($interests): void
+    public function setProjectInterests($interests): void
     {
-        $this->interests = $interests;
+        $this->projectInterests = $interests;
+    }
+
+    /**
+     * @param mixed $interests
+     */
+    public function setPossibleInterestsToAdd($interests): void
+    {
+        $this->possibleInterestsToAdd = $interests;
     }
 
     /**

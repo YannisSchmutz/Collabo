@@ -14,7 +14,9 @@
                                                  'urlPath' =>Request::path(), 'langFile' => 'profiletext'])
             @endcomponent
 
-            @component('components/interestBox', ['data' =>$data->getInterests()])
+            @component('components/interestBox', ['interestsToDisplay' =>$data->getUserInterests(),
+                                                  'possibleInterestsToAdd' =>$data->getPossibleInterestsToAdd(),
+                                                  'urlPath' =>Request::path()])
                     @lang('profiletext.interests_title')
             @endcomponent
 
