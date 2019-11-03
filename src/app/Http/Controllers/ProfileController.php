@@ -24,13 +24,28 @@ class ProfileController extends Controller
      */
     public function index()
     {
+        $user = auth()->user();
+
+        $user_interests = $user->interests;
+        $interest_names = [];
+        foreach ($user_interests as $interest){
+            array_push($interest_names, $interest->name);
+        }
+
+        $user_projects = $user->projects;
+        $project_names = [];
+        foreach ($user_projects as $project){
+            array_push($project_names, $project->name);
+        }
+
+
         $profileViewmodel = new ProfileViewmodel();
-        $profileViewmodel->setPitch('I am an awesome person! I love Blockchains, serverless computing and all other Buzzwordy Stuff!');
-        $profileViewmodel->setName('Melanie Müller');
-        $profileViewmodel->setCaption('Cyber Enthusiast | Blockchain Engineer');
-        $profileViewmodel->setInterests(['Blockchain', 'Security', 'Python']);
-        $profileViewmodel->setPicPath('pictures/portrait_placeholder.png');
-        $profileViewmodel->setProjects(['Proj1', 'Proj2']);
+        $profileViewmodel->setPitch($user->pitch);
+        $profileViewmodel->setName($user->name);
+        $profileViewmodel->setCaption($user->caption);
+        $profileViewmodel->setInterests($interest_names);
+        $profileViewmodel->setPicPath($user->profile_picture);
+        $profileViewmodel->setProjects($project_names);
 
         return view('profile')->with(['data' => $profileViewmodel]);
     }
