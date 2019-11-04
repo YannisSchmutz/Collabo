@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Model\Interest;
 use App\Http\Model\Project;
 use App\Http\ViewModel\ProjectDetailViewModel;
 use App\Http\ViewModel\ProjectsViewModel;
@@ -43,10 +44,20 @@ class ProjectsController extends Controller
 
         $project = Project::find($id);
 
-        $interests = $project->interests;
-        $interest_names = [];
-        foreach ($interests as $interest){
-            array_push($interest_names, $interest->name);
+        $projectInterests = $project->interests;
+        $projectInterestNames = [];
+        foreach ($projectInterests as $interest){
+            array_push($projectInterestNames, $interest->name);
+        }
+
+        $allInterests = Interest::all();
+        $possibleInterestsToAdd = [];
+        foreach ($allInterests as $interest){
+            $interestName = $interest->name;
+            // Only display interests that are not already in the user-interests
+            if (!in_array ( $interestName, $projectInterestNames )){
+                array_push($possibleInterestsToAdd, ['name' => $interest->name, 'id' => $interest->id]);
+            }
         }
 
         $projectDetailViewModel = new ProjectDetailViewModel();
@@ -55,9 +66,27 @@ class ProjectsController extends Controller
         $projectDetailViewModel->setCaption($project->caption);
         $projectDetailViewModel->setDescription($project->description);
         $projectDetailViewModel->setPicPath($project->project_picture);
-        $projectDetailViewModel->setInterests($interest_names);
+        $projectDetailViewModel->setProjectInterests($projectInterestNames);
+        $projectDetailViewModel->setPossibleInterestsToAdd($possibleInterestsToAdd);
 
 
         return view('pages.project_detail')->with(['data' => $projectDetailViewModel]);
+    }
+
+    public function addInterest(Request $request, $id){
+
+        //Todo: Send error-message to frontend if this fails
+        $this->validate($request, [
+            'interest_to_add' => 'required',
+        ]);
+        $project = Project::find($id);
+        // TODO: Validate interest
+        // todo: What happens if interest_id not in Interest-collection?
+        // todo: What happens if interest_id already in User-Interest-collection?
+        $interestToAdd = Interest::find($request->interest_id);
+        $project->interests()->save($interestToAdd);
+        $project->save();
+
+        return redirect('projects/'.$id.'/detail');
     }
 }

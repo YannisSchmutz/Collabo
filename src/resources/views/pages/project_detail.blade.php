@@ -5,15 +5,20 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-3">
-                @component('components/pitchbox', ['picPath' =>$data->getPicPath()])
+                @component('components/pitchBox', ['picPath' =>$data->getPicPath(), 'urlPath' =>Request::path(),
+                                                   'langFile' => 'projecttext'])
                     {{$data->getPitch()}}
                 @endcomponent
             </div>
             <div class="col-md-9">
-                @component('components/captionBox', ['title' =>$data->getName(), 'caption' =>$data->getCaption()])
+                @component('components/captionBox', ['title' =>$data->getName(), 'caption' =>$data->getCaption(),
+                                                     'urlPath' =>Request::path(), 'langFile' => 'projecttext'])
                 @endcomponent
 
-                @component('components/interestbox', ['data' =>$data->getInterests()])
+                @component('components/interestBox', ['interestsToDisplay' =>$data->getProjectInterests(),
+                                                      'possibleInterestsToAdd' =>$data->getPossibleInterestsToAdd(),
+                                                      'urlPath' =>Request::path(),
+                                                      'langFile' => 'projecttext'])
                     @lang('projecttext.interests_title')
                 @endcomponent
 

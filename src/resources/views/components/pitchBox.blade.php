@@ -4,17 +4,17 @@
     <p class="card-text p-2">{{$slot}}</p>
     <button type="button" class="ml-2 mr-2 btn btn-primary">Collab!</button>
 </div>
-<form action="/profile/editPitchbox" method="post" class="hiddenForm" id="pitchboxForm">
+<form action="/{{$urlPath}}/editPitchbox" method="post" class="hiddenForm" id="pitchboxForm">
     @csrf
     <div class="form-group">
-        <label for="profilepic">@lang('profiletext.pic_form')</label>
-        <input type="file" class="form-control" id="profilepic">
+        <label for="profilepic">@lang($langFile.'.pic_form')</label>
+        <input type="file" class="form-control" id="profilepic" name="profilepic">
     </div>
     <div class="form-group">
-        <label for="caption">@lang('profiletext.pitch_form')</label>
-        <input type="text" class="form-control" id="caption" value="{{$slot}}">
+        <label for="pitch">@lang($langFile.'.pitch_form')</label>
+        <input type="text" class="form-control" id="pitch" value="{{$slot}}" name="pitch">
     </div>
-    <button type="submit" class="btn btn-primary">@lang('profiletext.submit')</button>
+    <button type="submit" class="btn btn-primary">@lang('general.submit')</button>
 </form>
 <script>
     function togglePitchForm() {

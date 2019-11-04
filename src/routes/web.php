@@ -20,10 +20,12 @@ Route::get('home', 'PagesController@index');
 // ***** Projects *****
 Route::get('projects', 'ProjectsController@projects')->name('projects');
 Route::get('projects/{id}/detail', 'ProjectsController@detail');
+Route::post('projects/{id}/detail/addInterest', 'ProjectsController@addInterest');
 // ***** Profile *****
 Route::get('profile', 'ProfileController@index')->name('profile');
 Route::post('profile/editCaption', 'ProfileController@editCaption');
 Route::post('profile/editPitchbox', 'ProfileController@editPitchbox');
+Route::post('profile/addInterest', 'ProfileController@addInterest');
 // ***** Community *****
 Route::get('community', 'CommunityController@index')->name('community');
 Route::get('searchProject', 'CommunityController@searchProject')->name('searchProject');
