@@ -17,5 +17,6 @@ return [
     'pitch_form' => 'Pitch:',
     'pic_form' => 'Project picture:',
     'interests_placeholder' => 'Project interests to add...',
+    'create_new_project' => 'Create new project',
 
 ];

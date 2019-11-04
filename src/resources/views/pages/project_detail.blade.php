@@ -22,7 +22,7 @@
                     @lang('projecttext.interests_title')
                 @endcomponent
 
-                @component('components/descriptionBox', ['text' =>$data->getDescription()])
+                @component('components/descriptionBox', ['text' =>$data->getDescription(), 'urlPath' =>Request::path()])
                     @lang('projecttext.description_title')
                 @endcomponent
             </div>

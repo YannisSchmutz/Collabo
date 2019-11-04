@@ -7,6 +7,7 @@
 <form action="/{{$urlPath}}/editPitchbox" method="post" class="hiddenForm" id="pitchboxForm">
     @csrf
     <div class="form-group">
+        <i class="fas fa-edit float-right" onclick="togglePitchForm()"></i>
         <label for="profilepic">@lang($langFile.'.pic_form')</label>
         <input type="file" class="form-control" id="profilepic" name="profilepic">
     </div>
@@ -18,7 +19,14 @@
 </form>
 <script>
     function togglePitchForm() {
-        $("#pitchbox").fadeOut(10);
-        $("#pitchboxForm").fadeIn(500);
+        let pitchDisplay = $('#pitchboxForm').css('display');
+
+        if (pitchDisplay === 'none'){
+            $("#pitchbox").fadeOut(10);
+            $("#pitchboxForm").fadeIn(500);
+        } else {
+            $("#pitchboxForm").fadeOut(10);
+            $("#pitchbox").fadeIn(500);
+        }
     }
 </script>

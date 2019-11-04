@@ -19,8 +19,13 @@ Route::get ('/', 'PagesController@index');
 Route::get('home', 'PagesController@index');
 // ***** Projects *****
 Route::get('projects', 'ProjectsController@projects')->name('projects');
+Route::get('projects/create', 'ProjectsController@create');
+Route::post('projects/store', 'ProjectsController@store');
 Route::get('projects/{id}/detail', 'ProjectsController@detail');
 Route::post('projects/{id}/detail/addInterest', 'ProjectsController@addInterest');
+Route::post('projects/{id}/detail/editCaption', 'ProjectsController@editCaption');
+Route::post('projects/{id}/detail/editPitchbox', 'ProjectsController@editPitchbox');
+Route::post('projects/{id}/detail/editDescriptionBox', 'ProjectsController@editDescriptionBox');
 // ***** Profile *****
 Route::get('profile', 'ProfileController@index')->name('profile');
 Route::post('profile/editCaption', 'ProfileController@editCaption');
