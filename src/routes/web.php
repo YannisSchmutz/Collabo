@@ -26,8 +26,11 @@ Route::get('profile', 'ProfileController@index')->name('profile');
 Route::post('profile/editCaption', 'ProfileController@editCaption');
 Route::post('profile/editPitchbox', 'ProfileController@editPitchbox');
 Route::post('profile/addInterest', 'ProfileController@addInterest');
+// ***** Community *****
+Route::get('community', 'CommunityController@index')->name('community');
+Route::get('searchProject', 'CommunityController@searchProject')->name('searchProject');
+
 Route::get('swipe', 'PagesController@index')->name('swipe');
-Route::get('community', 'PagesController@index')->name('community');
 Route::get('inbox', 'PagesController@index')->name('inbox');
 Route::get('settings', 'PagesController@index')->name('settings');
 

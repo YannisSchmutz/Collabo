@@ -10,9 +10,11 @@
         <div class="col-sm-3">
             <ul class="float-right navbar-nav">
                 <li class="nav-item">
-                    <a href="/projects/{{$project->id}}/detail" class="btn btn-primary">{{ __('detail') }}</a>
-                    <a href="#" class="btn btn-secondary">{{ __('edit') }}</a>
-                    <a href="#" class="btn btn-danger">{{ __('leave') }}</a>
+                    <a href="/projects/{{$project->id}}/detail"><i class="fas fa-eye ml-2 mr-2"></i></a>
+                    |
+                    <a href="#"><i class="fas fa-edit ml-2 mr-2"></i></a>
+                    |
+                    <a href="#"><i class="fas fa-trash ml-2 mr-2"></i></a>
                 </li>
             </ul>
         </div>
