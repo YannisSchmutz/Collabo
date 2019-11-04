@@ -1,12 +1,13 @@
 <div>
 <div id="captionDiv">
-    <i class="fas fa-edit float-right" onclick="toggleVisibility()"></i>
+    <i class="fas fa-edit float-right" onclick="toggleCaptionForm()"></i>
     <h1 class="display-4">{{$title}}</h1>
     <h3 >{{$caption}}</h3>
 </div>
 <form action="/{{$urlPath}}/editCaption" method="post" class="hiddenForm" id="captionForm">
     @csrf
     <div class="form-group">
+        <i class="fas fa-edit float-right" onclick="toggleCaptionForm()"></i>
         <label for="fullname">@lang($langFile.'.fullname_form')</label>
         <input type="text" class="form-control" id="fullname" value="{{$title}}" name="fullname">
     </div>
@@ -18,8 +19,15 @@
 </form>
 </div>
 <script>
-    function toggleVisibility() {
-        $("#captionDiv").fadeOut(10);
-        $("#captionForm").fadeIn(500);
+    function toggleCaptionForm() {
+        let captionDisplay = $('#captionForm').css('display');
+
+        if (captionDisplay === 'none'){
+            $("#captionDiv").fadeOut(10);
+            $("#captionForm").fadeIn(500);
+        } else {
+            $("#captionForm").fadeOut(10);
+            $("#captionDiv").fadeIn(500);
+        }
     }
 </script>

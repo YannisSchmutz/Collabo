@@ -29,7 +29,6 @@
 <script>
     function toggleDescriptionForm() {
         let descriptionDisplay = $('#descriptionForm').css('display');
-        console.log(descriptionDisplay);
 
         if (descriptionDisplay === 'none'){
             $("#descriptionDiv").fadeOut(10);
