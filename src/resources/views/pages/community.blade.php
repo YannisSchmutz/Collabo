@@ -6,7 +6,7 @@
         <form method="POST" action="{{ URL::to('searchProject') }}" id="projectSearchForm" class="row mb-2">
             {{ csrf_field() }}
             <div class="col-6 input-group">
-                <input type="text" class="form-control" id="projectSearchText" name="projectSearchText" placeholder="{{ __('community.project_search') }}">
+                <input type="text" class="form-control" id="projectSearchText" name="projectSearchText" placeholder="{{ __('communitytext.project_search') }}">
                 <div class="input-group-btn">
                     <button type="submit" class="form-control btn">
                         <i class="fas fa-search"></i>

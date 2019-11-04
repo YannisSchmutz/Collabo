@@ -40,7 +40,7 @@ class CommunityController extends Controller
         }else{
             $projects = Project::where('name', 'like', '%' . $search . '%')
                 ->orWhere('pitch', 'like', '%' . $search . '%')
-                ->orderBy('id', 'desc')
+                ->orderBy('created_at', 'desc')
                 ->paginate(self::MAX_COUNT_PER_PAGE);
         }
 

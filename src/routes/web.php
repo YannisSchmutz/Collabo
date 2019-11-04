@@ -26,7 +26,7 @@ Route::post('profile/editCaption', 'ProfileController@editCaption');
 Route::post('profile/editPitchbox', 'ProfileController@editPitchbox');
 // ***** Community *****
 Route::get('community', 'CommunityController@index')->name('community');
-Route::get('searchProject', 'CommunityController@searchProject')->name('community');
+Route::get('searchProject', 'CommunityController@searchProject')->name('searchProject');
 
 Route::get('swipe', 'PagesController@index')->name('swipe');
 Route::get('inbox', 'PagesController@index')->name('inbox');
