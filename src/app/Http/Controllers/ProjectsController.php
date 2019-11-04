@@ -89,4 +89,69 @@ class ProjectsController extends Controller
 
         return redirect('projects/'.$id.'/detail');
     }
+
+    public function create(){
+        return view('pages.project_create');
+    }
+
+    public function store(Request $request){
+
+        // TODO: Validate
+        // TODO: Make Image optional (nullable) but use "/pictures/general_placeholder.png" if there isn't any
+
+        $user = auth()->user();
+
+        // TODO: Add missing parameters
+        $new_project = new Project();
+        $new_project->name = $request->fullname;
+        $new_project->pitch = $request->pitch;
+        $new_project->caption = $request->caption;
+        $new_project->description = $request->descriptionArea;
+        $new_project->project_picture = "/pictures/general_placeholder.png";
+        // Needs first save to have an ID for the new_project
+        $new_project->save();
+        // Save permission to the intermediate table.
+        $new_project->users()->save($user, ['permission' => 'owner']);
+        // Needs the second save to save the intermediate table.
+        $new_project->save();
+        $id = $new_project->id;
+
+        return redirect('projects/'.$id.'/detail');
+    }
+
+    public function editPitchbox(Request $request, $id)
+    {
+        //Todo: Send error-message to frontend if this fails
+        $this->validate($request, [
+            'pitch' => 'required',
+            'profilepic' => 'nullable'
+        ]);
+        // TODO: Be able to upload and save an image.
+        $project = Project::find($id);
+        $project->pitch = $request->pitch;
+        $project->save();
+
+        return redirect('projects/'.$id.'/detail');
+    }
+
+    public function editCaption(Request $request, $id){
+
+        //Todo: Send error-message to frontend if this fails
+        $this->validate($request, [
+            'fullname' => 'required',
+            'caption' => 'required'
+        ]);
+        $project = Project::find($id);
+        $project->caption = $request->caption;
+        $project->name = $request->fullname;
+        $project->save();
+        return redirect('projects/'.$id.'/detail');
+    }
+
+    public function editDescriptionBox(Request $request, $id){
+        $project = Project::find($id);
+        $project->description = $request->descriptionArea;
+        $project->save();
+        return redirect('projects/'.$id.'/detail');
+    }
 }
