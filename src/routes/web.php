@@ -23,6 +23,7 @@ Route::get('projects/create', 'ProjectsController@create');
 Route::post('projects/store', 'ProjectsController@store');
 Route::get('projects/{id}/detail', 'ProjectsController@detail');
 Route::post('projects/{id}/detail/addInterest', 'ProjectsController@addInterest');
+Route::post('projects/{id}/detail/removeInterest', 'ProjectsController@removeInterest');
 Route::post('projects/{id}/detail/editCaption', 'ProjectsController@editCaption');
 Route::post('projects/{id}/detail/editPitchbox', 'ProjectsController@editPitchbox');
 Route::post('projects/{id}/detail/editDescriptionBox', 'ProjectsController@editDescriptionBox');
@@ -31,6 +32,7 @@ Route::get('profile', 'ProfileController@index')->name('profile');
 Route::post('profile/editCaption', 'ProfileController@editCaption');
 Route::post('profile/editPitchbox', 'ProfileController@editPitchbox');
 Route::post('profile/addInterest', 'ProfileController@addInterest');
+Route::post('profile/removeInterest', 'ProfileController@removeInterest');
 // ***** Community *****
 Route::get('community', 'CommunityController@index')->name('community');
 Route::get('searchProject', 'CommunityController@searchProject')->name('searchProject');
