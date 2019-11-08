@@ -1,6 +1,6 @@
 <ul class="list-group">
-@foreach ($data->getProjects() as $project)
-    @component('components/projectListItem', ['project' =>$project])
+@foreach ($data->getProjectListItemViewModels() as $projectVm)
+    @component('components/projectListItem',['projectVM' => $projectVm])
     @endcomponent
 @endforeach
 </ul>

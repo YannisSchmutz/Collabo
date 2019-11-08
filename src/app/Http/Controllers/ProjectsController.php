@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Model\Interest;
 use App\Http\Model\Project;
 use App\Http\ViewModel\ProjectDetailViewModel;
+use App\Http\ViewModel\ProjectListItemViewModel;
 use App\Http\ViewModel\ProjectsViewModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;;
@@ -26,10 +27,13 @@ class ProjectsController extends Controller
         $ownedProjects = [];
         $relatedProjects = [];
         foreach(auth()->user()->projects as $project){
+            $projectListItemViewModel = new ProjectListItemViewModel();
+            $projectListItemViewModel->setProject($project);
+            $projectListItemViewModel->setIsRemovable(true);
             if($project->pivot->permission == 'owner') {
-                array_push ( $ownedProjects, $project);
+                array_push ( $ownedProjects, $projectListItemViewModel);
             }else {
-                array_push ( $relatedProjects, $project);
+                array_push ( $relatedProjects, $projectListItemViewModel);
             }
         }
 

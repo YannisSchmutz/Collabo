@@ -34,6 +34,7 @@ Route::post('profile/addInterest', 'ProfileController@addInterest');
 // ***** Community *****
 Route::get('community', 'CommunityController@index')->name('community');
 Route::get('searchProject', 'CommunityController@searchProject')->name('searchProject');
+Route::get('searchProfile', 'CommunityController@searchProfile')->name('searchProfile');
 
 Route::get('swipe', 'PagesController@index')->name('swipe');
 Route::get('inbox', 'PagesController@index')->name('inbox');
