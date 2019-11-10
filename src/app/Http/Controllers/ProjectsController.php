@@ -7,6 +7,7 @@ use App\Http\Model\Project;
 use App\Http\ViewModel\ProjectDetailViewModel;
 use App\Http\ViewModel\ProjectsViewModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;;
 
 class ProjectsController extends Controller
@@ -75,12 +76,13 @@ class ProjectsController extends Controller
     }
 
     public function addInterest(Request $request, $lang, $id){
-
         //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
             'interest_to_add' => 'required',
         ]);
         $project = Project::find($id);
+        Gate::authorize('edit-project', $project);
+
         // TODO: Validate interest
         // todo: What happens if interest_id not in Interest-collection?
         // todo: What happens if interest_id already in User-Interest-collection?
@@ -130,6 +132,8 @@ class ProjectsController extends Controller
         ]);
         // TODO: Be able to upload and save an image.
         $project = Project::find($id);
+        Gate::authorize('edit-project', $project);
+
         $project->pitch = $request->pitch;
         $project->save();
 
@@ -144,6 +148,8 @@ class ProjectsController extends Controller
             'caption' => 'required'
         ]);
         $project = Project::find($id);
+        Gate::authorize('edit-project', $project);
+
         $project->caption = $request->caption;
         $project->name = $request->fullname;
         $project->save();
@@ -151,7 +157,10 @@ class ProjectsController extends Controller
     }
 
     public function editDescriptionBox(Request $request, $lang, $id){
+
         $project = Project::find($id);
+        Gate::authorize('edit-project', $project);
+
         $project->description = $request->descriptionArea;
         $project->save();
         return redirect(app()->getLocale().'/projects/'.$id.'/detail');
