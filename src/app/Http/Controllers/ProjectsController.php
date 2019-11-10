@@ -40,7 +40,7 @@ class ProjectsController extends Controller
         return view('pages.projects')->with(['data' => $projectsViewmodel]);
     }
 
-    public function detail($id){
+    public function detail($lang, $id){
 
         $project = Project::find($id);
 
@@ -61,6 +61,7 @@ class ProjectsController extends Controller
         }
 
         $projectDetailViewModel = new ProjectDetailViewModel();
+        $projectDetailViewModel->setId($project->id);
         $projectDetailViewModel->setName($project->name);
         $projectDetailViewModel->setPitch($project->pitch);
         $projectDetailViewModel->setCaption($project->caption);
@@ -73,7 +74,7 @@ class ProjectsController extends Controller
         return view('pages.project_detail')->with(['data' => $projectDetailViewModel]);
     }
 
-    public function addInterest(Request $request, $id){
+    public function addInterest(Request $request, $lang, $id){
 
         //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
@@ -120,7 +121,7 @@ class ProjectsController extends Controller
         return redirect(app()->getLocale().'/projects/'.$id.'/detail');
     }
 
-    public function editPitchbox(Request $request, $id)
+    public function editPitchbox(Request $request, $lang, $id)
     {
         //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
@@ -135,7 +136,7 @@ class ProjectsController extends Controller
         return redirect(app()->getLocale().'/projects/'.$id.'/detail');
     }
 
-    public function editCaption(Request $request, $id){
+    public function editCaption(Request $request, $lang, $id){
 
         //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
@@ -149,7 +150,7 @@ class ProjectsController extends Controller
         return redirect('projects/'.$id.'/detail');
     }
 
-    public function editDescriptionBox(Request $request, $id){
+    public function editDescriptionBox(Request $request, $lang, $id){
         $project = Project::find($id);
         $project->description = $request->descriptionArea;
         $project->save();

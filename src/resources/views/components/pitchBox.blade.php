@@ -4,7 +4,7 @@
     <p class="card-text p-2">{{$slot}}</p>
     <button type="button" class="ml-2 mr-2 btn btn-primary">Collab!</button>
 </div>
-<form action="{{route($routeName, app()->getLocale())}}" method="post" class="hiddenForm" id="pitchboxForm">
+<form action="{{$routeName}}" method="post" class="hiddenForm" id="pitchboxForm">
     @csrf
     <div class="form-group">
         <i class="fas fa-edit float-right" onclick="togglePitchForm()"></i>
