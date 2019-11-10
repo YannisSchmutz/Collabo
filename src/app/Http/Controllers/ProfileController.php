@@ -74,7 +74,7 @@ class ProfileController extends Controller
         $user->pitch = $request->pitch;
         $user->save();
 
-        return redirect('profile');
+        return redirect(app()->getLocale().'/profile');
         //return $request->all();
     }
 
@@ -89,7 +89,7 @@ class ProfileController extends Controller
         $user->caption = $request->caption;
         $user->name = $request->fullname;
         $user->save();
-        return redirect('profile');
+        return redirect(app()->getLocale().'/profile');
     }
 
     public function addInterest(Request $request){
@@ -106,6 +106,6 @@ class ProfileController extends Controller
         $user->interests()->save($interestToAdd);
         $user->save();
 
-        return redirect('profile');
+        return redirect(app()->getLocale().'/profile');
     }
 }

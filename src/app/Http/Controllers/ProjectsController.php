@@ -87,7 +87,8 @@ class ProjectsController extends Controller
         $project->interests()->save($interestToAdd);
         $project->save();
 
-        return redirect('projects/'.$id.'/detail');
+
+        return redirect(app()->getLocale().'/projects/'.$id.'/detail');
     }
 
     public function create(){
@@ -116,7 +117,7 @@ class ProjectsController extends Controller
         $new_project->save();
         $id = $new_project->id;
 
-        return redirect('projects/'.$id.'/detail');
+        return redirect(app()->getLocale().'/projects/'.$id.'/detail');
     }
 
     public function editPitchbox(Request $request, $id)
@@ -131,7 +132,7 @@ class ProjectsController extends Controller
         $project->pitch = $request->pitch;
         $project->save();
 
-        return redirect('projects/'.$id.'/detail');
+        return redirect(app()->getLocale().'/projects/'.$id.'/detail');
     }
 
     public function editCaption(Request $request, $id){
@@ -152,6 +153,6 @@ class ProjectsController extends Controller
         $project = Project::find($id);
         $project->description = $request->descriptionArea;
         $project->save();
-        return redirect('projects/'.$id.'/detail');
+        return redirect(app()->getLocale().'/projects/'.$id.'/detail');
     }
 }

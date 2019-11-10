@@ -3,7 +3,7 @@
 @section('content')
     <div class="justify-content-center">
         <h3>{{ __('projects') }}</h3>
-        <form method="POST" action="{{ URL::to('searchProject') }}" id="projectSearchForm" class="row mb-2">
+        <form method="POST" action="{{ route('searchProject', app()->getLocale()) }}" id="projectSearchForm" class="row mb-2">
             {{ csrf_field() }}
             <div class="col-6 input-group">
                 <input type="text" class="form-control" id="projectSearchText" name="projectSearchText" placeholder="{{ __('communitytext.project_search') }}">
@@ -64,7 +64,7 @@
             $('#projectSearchText').keyup(function(){
                 let searchterm = $('#projectSearchText').val();
                 $.get(
-                    "{{ URL::to('searchProject') }}",
+                    "{{ route('searchProject', app()->getLocale()) }}",
                     {searchterm:searchterm},
                     onAjaxResult
                 )
@@ -79,7 +79,7 @@
 
         function getInitialProjectList(){
             $.get(
-                "{{ URL::to('searchProject') }}",
+                "{{ route('searchProject', app()->getLocale()) }}",
                 {searchterm:''},
                 onAjaxResult
             )

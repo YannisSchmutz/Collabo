@@ -10,8 +10,7 @@
         </div>
 
     </div>
-
-    <form action="/{{$urlPath}}/editDescriptionBox" method="post" class="hiddenForm" id="descriptionForm">
+    <form action="{{route($routeName, app()->getLocale())}}" method="post" class="hiddenForm" id="descriptionForm">
         @csrf
         <div class="card p-2 form-group">
             <div>

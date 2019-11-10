@@ -11,38 +11,38 @@
                 <!-- Authentication Links -->
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        <a class="nav-link" href="{{ route('login', app()->getLocale()) }}">{{ __('Login') }}</a>
                     </li>
                     @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="nav-link" href="{{ route('register', app()->getLocale()) }}">{{ __('Register') }}</a>
                         </li>
                     @endif
                 @else
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('profile') }}">{{ __('Profile') }}</a>
+                        <a class="nav-link" href="{{ route('profile', app()->getLocale()) }}">{{ __('Profile') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('projects') }}">{{ __('Projects') }}</a>
+                        <a class="nav-link" href="{{ route('projects', app()->getLocale()) }}">{{ __('Projects') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('swipe') }}">{{ __('Swipe') }}</a>
+                        <a class="nav-link" href="{{ route('swipe', app()->getLocale()) }}">{{ __('Swipe') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('community') }}">{{ __('Community') }}</a>
+                        <a class="nav-link" href="{{ route('community', app()->getLocale()) }}">{{ __('Community') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('inbox') }}">{{ __('Inbox') }}</a>
+                        <a class="nav-link" href="{{ route('inbox', app()->getLocale()) }}">{{ __('Inbox') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('settings') }}">{{ __('Settings') }}</a>
+                        <a class="nav-link" href="{{ route('settings', app()->getLocale()) }}">{{ __('Settings') }}</a>
                     </li>
                     <li>
                         <a class="nav-link" href="#" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        <form id="logout-form" action="{{ route('logout', app()->getLocale()) }}" method="POST" style="display: none;">
                             @csrf
                         </form>
                     </li>
@@ -52,10 +52,10 @@
             <div class="col-sm">
                 <ul class="navbar-nav border-left float-right">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('welcome', ['locale' => 'en']) }}">{{ __('EN') }}</a>
+                        <a class="nav-link" href="{{ route('profile', ['language' => 'en']) }}">{{ __('EN') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('welcome', ['locale' => 'DE']) }}">{{ __('DE') }}</a>
+                        <a class="nav-link" href="{{ route('profile', ['language' => 'de']) }}">{{ __('DE') }}</a>
                     </li>
                 </ul>
             </div>
