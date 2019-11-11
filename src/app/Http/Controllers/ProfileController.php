@@ -118,6 +118,8 @@ class ProfileController extends Controller
     }
 
     public function removeInterest(Request $request){
+        Gate::authorize('edit-profile', $request->user());
+
         //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
             'interest_id_to_remove' => 'required',
@@ -129,6 +131,6 @@ class ProfileController extends Controller
         $user->interests()->detach($interestToRemove);
         $user->save();
 
-        return redirect('profile');
+        return redirect(app()->getLocale().'/profile');
     }
 }

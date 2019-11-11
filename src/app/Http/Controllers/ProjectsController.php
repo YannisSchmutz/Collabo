@@ -95,13 +95,15 @@ class ProjectsController extends Controller
         return redirect(app()->getLocale().'/projects/'.$id.'/detail');
     }
 
-    public function removeInterest(Request $request, $id){
+    public function removeInterest(Request $request, $lang, $id){
         //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
             'interest_id_to_remove' => 'required',
         ]);
 
         $project = Project::find($id);
+        Gate::authorize('edit-project', $project);
+
         // TODO: Validate interest
         $interestToRemove = Interest::find($request->interest_id_to_remove);
         $project->interests()->detach($interestToRemove);
@@ -170,7 +172,7 @@ class ProjectsController extends Controller
         $project->caption = $request->caption;
         $project->name = $request->fullname;
         $project->save();
-        return redirect('projects/'.$id.'/detail');
+        return redirect(app()->getLocale().'/projects/'.$id.'/detail');
     }
 
     public function editDescriptionBox(Request $request, $lang, $id){

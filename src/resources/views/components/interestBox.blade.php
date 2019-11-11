@@ -1,7 +1,7 @@
 <div class="card mt-4 mb-4 p-2">
     <h3 class="card-title">{{$slot}}</h3>
     <div class="card-body">
-        <form action="/{{$urlPath}}/removeInterest" method="post" id="removeInterestForm">
+        <form action="{{$routeNameRemove}}" method="post" id="removeInterestForm">
             @csrf
             @foreach ($interestsToDisplay as $interest)
                 <span class="badge badge-info">
@@ -14,7 +14,7 @@
         </form>
     </div>
 
-    <form action="{{$routeName}}" method="post" id="addInterestForm" onsubmit="return validateAddInterest();">
+    <form action="{{$routeNameAdd}}" method="post" id="addInterestForm" onsubmit="return validateAddInterest();">
         @csrf
         <div class="input-group mb-3">
             <input name="interest_to_add" id="interest_to_add" type="text" list="interests" class="form-control" placeholder="@lang($langFile.'.interests_placeholder')" aria-describedby="basic-addon2"/>
