@@ -4,7 +4,7 @@
     <h1 class="display-4">{{$title}}</h1>
     <h3 >{{$caption}}</h3>
 </div>
-<form action="/{{$urlPath}}/editCaption" method="post" class="hiddenForm" id="captionForm">
+<form action="{{$routeName}}" method="post" class="hiddenForm" id="captionForm">
     @csrf
     <div class="form-group">
         <i class="fas fa-edit float-right" onclick="toggleCaptionForm()"></i>

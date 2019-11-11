@@ -9,7 +9,7 @@
         @endforeach
     </div>
 
-    <form action="/{{$urlPath}}/addInterest" method="post" id="addInterestForm" onsubmit="return validateAddInterest();">
+    <form action="{{$routeName}}" method="post" id="addInterestForm" onsubmit="return validateAddInterest();">
         @csrf
         <div class="input-group mb-3">
             <input name="interest_to_add" id="interest_to_add" type="text" list="interests" class="form-control" placeholder="@lang($langFile.'.interests_placeholder')" aria-describedby="basic-addon2"/>
