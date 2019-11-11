@@ -67,10 +67,17 @@ class ProfileController extends Controller
         //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
             'pitch' => 'required',
-            'profilepic' => 'optional'
+            'profilepic' => 'nullable'
         ]);
         $user = auth()->user();
-        // TODO: Be able to upload and save an image.
+
+        $file = $request->file('profilepic');
+        if($file != null){
+            $picname = auth()->user()->getAuthIdentifier().$file->getClientOriginalName();
+            $file->move('/var/www/public/pictures/', $picname);
+            $user->profile_picture = "/pictures/".$picname;
+        }
+
         $user->pitch = $request->pitch;
         $user->save();
 

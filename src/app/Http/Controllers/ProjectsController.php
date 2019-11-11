@@ -126,11 +126,15 @@ class ProjectsController extends Controller
             'pitch' => 'required',
             'profilepic' => 'nullable'
         ]);
-        // TODO: Be able to upload and save an image.
         $project = Project::find($id);
+        $file = $request->file('profilepic');
+        if($file != null){
+            $picname = $project->id.$file->getClientOriginalName();
+            $file->move('/var/www/public/pictures/', $picname);
+            $project->project_picture = "/pictures/".$picname;
+        }
         $project->pitch = $request->pitch;
         $project->save();
-
         return redirect('projects/'.$id.'/detail');
     }
 
