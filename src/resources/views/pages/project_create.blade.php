@@ -4,7 +4,7 @@
 @section('content')
     <div class="container">
 
-        <form action="/projects/store" method="post" id="createProjectForm">
+        <form action="{{route('storeProject', app()->getLocale())}}" method="post" id="createProjectForm">
             @csrf
             <div class="row justify-content-center">
 

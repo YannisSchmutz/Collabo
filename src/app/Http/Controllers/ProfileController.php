@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\ViewModel\ProfileViewmodel;
 use App\Http\Model\Interest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 
 class ProfileController extends Controller
 {
     /**
      * Create a new controller instance.
+     * The auth middleware will stop unauthenticated access and redirect to the login page
      *
      * @return void
      */
@@ -64,6 +66,8 @@ class ProfileController extends Controller
 
     public function editPitchbox(Request $request)
     {
+        Gate::authorize('edit-profile', $request->user());
+
         //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
             'pitch' => 'required',
@@ -81,12 +85,12 @@ class ProfileController extends Controller
         $user->pitch = $request->pitch;
         $user->save();
 
-        return redirect('profile');
+        return redirect(app()->getLocale().'/profile');
         //return $request->all();
     }
 
     public function editCaption(Request $request){
-
+        Gate::authorize('edit-profile', $request->user());
         //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
             'fullname' => 'required',
@@ -96,10 +100,11 @@ class ProfileController extends Controller
         $user->caption = $request->caption;
         $user->name = $request->fullname;
         $user->save();
-        return redirect('profile');
+        return redirect(app()->getLocale().'/profile');
     }
 
     public function addInterest(Request $request){
+        Gate::authorize('edit-profile', $request->user());
 
         //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
@@ -113,6 +118,6 @@ class ProfileController extends Controller
         $user->interests()->save($interestToAdd);
         $user->save();
 
-        return redirect('profile');
+        return redirect(app()->getLocale().'/profile');
     }
 }
