@@ -26,6 +26,7 @@ Route::post('projects/{id}/detail/addInterest', 'ProjectsController@addInterest'
 Route::post('projects/{id}/detail/editCaption', 'ProjectsController@editCaption');
 Route::post('projects/{id}/detail/editPitchbox', 'ProjectsController@editPitchbox');
 Route::post('projects/{id}/detail/editDescriptionBox', 'ProjectsController@editDescriptionBox');
+Route::get('projects/{id}/unsubscribe', 'ProjectsController@unsubscribe');
 // ***** Profile *****
 Route::get('profile', 'ProfileController@index')->name('profile');
 Route::post('profile/editCaption', 'ProfileController@editCaption');

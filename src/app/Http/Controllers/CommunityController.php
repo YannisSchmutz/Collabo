@@ -26,25 +26,7 @@ class CommunityController extends Controller
         $projects = Project::orderBy('created_at', 'desc')
             ->paginate(self::MAX_COUNT_PER_PAGE);
 
-        $communityViewModel = new CommunityViewModel();
-        $communityViewModel->setProjects($projects);
-
-        $removableProjectIds = array();
-        foreach(auth()->user()->projects as $project){
-            array_push ( $removableProjectIds, $project->id);
-        }
-
-        $projectViewModels = array();
-        foreach($projects as $project){
-            $projectViewModel = new ProjectListItemViewModel();
-            $projectViewModel->setProject($project);
-            $projectViewModel->setIsRemovable(
-                in_array($project->id, $removableProjectIds)
-            );
-            array_push($projectViewModels, $projectViewModel);
-        }
-
-        $communityViewModel->setProjectListItemViewModels($projectViewModels);
+        $communityViewModel = $this->getFilledViewModelByProjects($projects);
 
         $profiles = User::orderBy('created_at', 'desc')
             ->paginate(self::MAX_COUNT_PER_PAGE);
@@ -68,14 +50,7 @@ class CommunityController extends Controller
                 ->paginate(self::MAX_COUNT_PER_PAGE);
         }
 
-        $communityViewModel = new CommunityViewModel();
-        $communityViewModel->setProjects($projects);
-
-        $removableProjectIds = array();
-        foreach(auth()->user()->projects as $project){
-            array_push ( $removableProjectIds, $project->id);
-        }
-        $communityViewModel->setRemovableProjectIds($removableProjectIds);
+        $communityViewModel = $this->getFilledViewModelByProjects($projects);
 
         $html = view('components.ajaxProjectList')
             ->with('data', $communityViewModel)
@@ -89,6 +64,29 @@ class CommunityController extends Controller
             ),
             200
         );
+    }
+
+    private function getFilledViewModelByProjects($projects){
+        $communityViewModel = new CommunityViewModel();
+        $communityViewModel->setProjects($projects);
+
+        $removableProjectIds = array();
+        foreach(auth()->user()->projects as $project){
+            array_push ( $removableProjectIds, $project->id);
+        }
+
+        $projectViewModels = array();
+        foreach($projects as $project){
+            $projectViewModel = new ProjectListItemViewModel();
+            $projectViewModel->setProject($project);
+            $projectViewModel->setIsRemovable(
+                in_array($project->id, $removableProjectIds)
+            );
+            array_push($projectViewModels, $projectViewModel);
+        }
+
+        $communityViewModel->setProjectListItemViewModels($projectViewModels);
+        return $communityViewModel;
     }
 
     public function searchProfile(Request $request){

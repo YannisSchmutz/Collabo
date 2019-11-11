@@ -13,7 +13,7 @@
                     <a href="/projects/{{$projectVM->getProject()->id}}/detail"><i class="fas fa-eye ml-2 mr-2"></i></a>
                     @if ($projectVM->getIsRemovable())
                         |
-                        <a href="#"><i class="fas fa-trash ml-2 mr-2"></i></a>
+                        <a href="/projects/{{$projectVM->getProject()->id}}/unsubscribe"><i class="fas fa-trash ml-2 mr-2"></i></a>
                     @endif
                 </li>
             </ul>

@@ -158,4 +158,15 @@ class ProjectsController extends Controller
         $project->save();
         return redirect('projects/'.$id.'/detail');
     }
+
+    public function unsubscribe(Request $request, $id){
+        $project = auth()->user()->projects()->find($id);
+        if($project->pivot->permission == 'owner') {
+            $project->delete();
+//            $project->save();
+        }
+        auth()->user()->projects()->detach($project);
+        auth()->user()->save();
+        return redirect('projects');
+    }
 }
