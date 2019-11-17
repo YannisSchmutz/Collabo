@@ -3,7 +3,7 @@
 @section('content')
     <div class="justify-content-center">
         <h3>{{ __('projects') }}</h3>
-        <form method="POST" action="{{ URL::to('searchProject') }}" id="projectSearchForm" class="row mb-2 searchForm">
+        <form method="GET" action="{{ route('searchProject', app()->getLocale()) }}" id="projectSearchForm" class="row mb-2 searchForm">
             {{ csrf_field() }}
             <div class="col-6 input-group">
                 <input type="text" class="form-control inputSearchText" id="projectSearchText" name="projectSearchText" placeholder="{{ __('communitytext.project_search') }}">
@@ -21,7 +21,7 @@
     </div>
     <div class="justify-content-center mt-3">
         <h3>{{ __('users') }}</h3>
-        <form method="POST" action="{{ URL::to('searchProfile') }}" id="profileSearchForm" class="row mb-2 searchForm">
+        <form method="GET" action="{{ route('searchProfile', app()->getLocale()) }}" id="profileSearchForm" class="row mb-2 searchForm">
             {{ csrf_field() }}
             <div class="col-6 input-group">
                 <input type="text" class="form-control inputSearchText" id="profileSearchText" name="profileSearchText" placeholder="{{ __('communitytext.profile_search') }}">
@@ -47,8 +47,9 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            $('#projectSearchForm').attr('action', '{{ URL::to('searchProject') }}');
-            $('#profileSearchForm').attr('action', '{{ URL::to('searchProfile') }}');
+            //not needed since non-js search is no longer possible
+            {{--$('#projectSearchForm').attr('action', '{{ route('searchProject', app()->getLocale()) }}');--}}
+            {{--$('#profileSearchForm').attr('action', '{{ route('searchProfile', app()->getLocale()) }}');--}}
         }
 
         function onAjaxResult(result){
@@ -99,7 +100,7 @@
 
         function getInitialProjectList(){
             $.get(
-                '{{ URL::to('searchProject') }}',
+                '{{ route('searchProject', app()->getLocale()) }}',
                 {
                     searchterm:'',
                     resultElementId:'projectSearchResult'
@@ -110,7 +111,7 @@
 
         function getInitialProfileList(){
             $.get(
-                '{{ URL::to('searchProfile') }}',
+                '{{ route('searchProfile', app()->getLocale()) }}',
                 {
                     searchterm:'',
                     resultElementId:'profileSearchResult'

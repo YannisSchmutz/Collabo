@@ -6,6 +6,7 @@ namespace App\Http\ViewModel;
 
 class ProjectDetailViewModel
 {
+    private $id;
     private $name;
     private $caption;
     private $picPath;
@@ -13,6 +14,22 @@ class ProjectDetailViewModel
     private $description;
     private $projectInterests;
     private $possibleInterestsToAdd;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
 
     /**
      * @return mixed

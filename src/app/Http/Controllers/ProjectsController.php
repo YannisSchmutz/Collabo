@@ -8,6 +8,7 @@ use App\Http\ViewModel\ProjectDetailViewModel;
 use App\Http\ViewModel\ProjectListItemViewModel;
 use App\Http\ViewModel\ProjectsViewModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;;
 
 class ProjectsController extends Controller
@@ -44,7 +45,7 @@ class ProjectsController extends Controller
         return view('pages.projects')->with(['data' => $projectsViewmodel]);
     }
 
-    public function detail($id){
+    public function detail($lang, $id){
 
         $project = Project::find($id);
 
@@ -65,6 +66,7 @@ class ProjectsController extends Controller
         }
 
         $projectDetailViewModel = new ProjectDetailViewModel();
+        $projectDetailViewModel->setId($project->id);
         $projectDetailViewModel->setName($project->name);
         $projectDetailViewModel->setPitch($project->pitch);
         $projectDetailViewModel->setCaption($project->caption);
@@ -77,13 +79,14 @@ class ProjectsController extends Controller
         return view('pages.project_detail')->with(['data' => $projectDetailViewModel]);
     }
 
-    public function addInterest(Request $request, $id){
-
+    public function addInterest(Request $request, $lang, $id){
         //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
             'interest_to_add' => 'required',
         ]);
         $project = Project::find($id);
+        Gate::authorize('edit-project', $project);
+
         // TODO: Validate interest
         // todo: What happens if interest_id not in Interest-collection?
         // todo: What happens if interest_id already in User-Interest-collection?
@@ -91,7 +94,8 @@ class ProjectsController extends Controller
         $project->interests()->save($interestToAdd);
         $project->save();
 
-        return redirect('projects/'.$id.'/detail');
+
+        return redirect(app()->getLocale().'/projects/'.$id.'/detail');
     }
 
     public function create(){
@@ -120,10 +124,10 @@ class ProjectsController extends Controller
         $new_project->save();
         $id = $new_project->id;
 
-        return redirect('projects/'.$id.'/detail');
+        return redirect(app()->getLocale().'/projects/'.$id.'/detail');
     }
 
-    public function editPitchbox(Request $request, $id)
+    public function editPitchbox(Request $request, $lang, $id)
     {
         //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
@@ -132,13 +136,15 @@ class ProjectsController extends Controller
         ]);
         // TODO: Be able to upload and save an image.
         $project = Project::find($id);
+        Gate::authorize('edit-project', $project);
+
         $project->pitch = $request->pitch;
         $project->save();
 
-        return redirect('projects/'.$id.'/detail');
+        return redirect(app()->getLocale().'/projects/'.$id.'/detail');
     }
 
-    public function editCaption(Request $request, $id){
+    public function editCaption(Request $request, $lang, $id){
 
         //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
@@ -146,27 +152,31 @@ class ProjectsController extends Controller
             'caption' => 'required'
         ]);
         $project = Project::find($id);
+        Gate::authorize('edit-project', $project);
+
         $project->caption = $request->caption;
         $project->name = $request->fullname;
         $project->save();
         return redirect('projects/'.$id.'/detail');
     }
 
-    public function editDescriptionBox(Request $request, $id){
+    public function editDescriptionBox(Request $request, $lang, $id){
+
         $project = Project::find($id);
+        Gate::authorize('edit-project', $project);
+
         $project->description = $request->descriptionArea;
         $project->save();
-        return redirect('projects/'.$id.'/detail');
+        return redirect(app()->getLocale().'/projects/'.$id.'/detail');
     }
 
-    public function unsubscribe(Request $request, $id){
+    public function unsubscribe(Request $request, $lang, $id){
         $project = auth()->user()->projects()->find($id);
         if($project->pivot->permission == 'owner') {
             $project->delete();
-//            $project->save();
         }
         auth()->user()->projects()->detach($project);
         auth()->user()->save();
-        return redirect('projects');
+        return redirect(app()->getLocale().'/projects');
     }
 }

@@ -15,23 +15,57 @@
 //    return view('index');
 //});
 
+
+Route::redirect('/', '/en');
+
+Route::group(['prefix' => '{language}'], function () {
+    $validateLangage = '[a-z]{2,8}';
+    $validateId = '[0-9]+';
+
 Route::get ('/', 'PagesController@index');
 Route::get('home', 'PagesController@index');
+
+
 // ***** Projects *****
 Route::get('projects', 'ProjectsController@projects')->name('projects');
-Route::get('projects/create', 'ProjectsController@create');
-Route::post('projects/store', 'ProjectsController@store');
-Route::get('projects/{id}/detail', 'ProjectsController@detail');
-Route::post('projects/{id}/detail/addInterest', 'ProjectsController@addInterest');
-Route::post('projects/{id}/detail/editCaption', 'ProjectsController@editCaption');
-Route::post('projects/{id}/detail/editPitchbox', 'ProjectsController@editPitchbox');
-Route::post('projects/{id}/detail/editDescriptionBox', 'ProjectsController@editDescriptionBox');
-Route::get('projects/{id}/unsubscribe', 'ProjectsController@unsubscribe');
+
+Route::get('project/create', 'ProjectsController@create')->name('createProject');
+Route::post('project/store', 'ProjectsController@store')->name('storeProject');
+
+Route::get('projects/{id}/detail', 'ProjectsController@detail')
+    ->where(['id' => $validateId, 'language' => $validateLangage])
+    ->name('projectsdetails');
+
+Route::post('project/{id}/detail/addInterest', 'ProjectsController@addInterest')
+    ->where(['id' => $validateId, 'language' => $validateLangage])
+    ->name('projectAddInterest');
+
+Route::post('project/{id}/detail/editCaption', 'ProjectsController@editCaption')
+    ->where(['id' => $validateId, 'language' => $validateLangage])
+    ->name('projectEditCaption');
+
+Route::post('project/{id}/detail/editPitchbox', 'ProjectsController@editPitchbox')
+    ->where(['id' => $validateId, 'language' => $validateLangage])
+    ->name('projectEditPitchbox');
+
+Route::post('project/{id}/detail/editDescriptionBox', 'ProjectsController@editDescriptionBox')
+    ->where(['id' => $validateId, 'language' => $validateLangage])
+    ->name('projectEditDescriptionBox');
+
+Route::get('projects/{id}/unsubscribe', 'ProjectsController@unsubscribe')
+    ->where(['id' => $validateId, 'language' => $validateLangage])
+    ->name('projectunsubscribe');
+
 // ***** Profile *****
 Route::get('profile', 'ProfileController@index')->name('profile');
-Route::post('profile/editCaption', 'ProfileController@editCaption');
-Route::post('profile/editPitchbox', 'ProfileController@editPitchbox');
-Route::post('profile/addInterest', 'ProfileController@addInterest');
+Route::post('profile/editCaption', 'ProfileController@editCaption')
+    ->where(['language' => $validateLangage])
+    ->name('profileEditCaption');
+
+Route::post('profile/editPitchbox', 'ProfileController@editPitchbox')->name('profileEditPitchbox');
+Route::post('profile/addInterest', 'ProfileController@addInterest')->name('profileAddInterest');
+
+
 // ***** Community *****
 Route::get('community', 'CommunityController@index')->name('community');
 Route::get('searchProject', 'CommunityController@searchProject')->name('searchProject');
@@ -41,10 +75,7 @@ Route::get('swipe', 'PagesController@index')->name('swipe');
 Route::get('inbox', 'PagesController@index')->name('inbox');
 Route::get('settings', 'PagesController@index')->name('settings');
 
-Route::get('welcome/{locale}', function ($locale) {
-    App::setLocale($locale);
-    return redirect('profile');
-})->name('welcome');
 
 Auth::routes();
+});
 

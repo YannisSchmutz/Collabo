@@ -12,7 +12,7 @@
 
         <div class="card">
             <div class="card-body">
-                <form action="/projects/create" method="get" id="captionForm">
+                <form action="{{route('createProject', app()->getLocale())}}" method="get" id="captionForm">
                     @csrf
                     <button type="submit" class="btn btn-primary">@lang('projecttext.create_new_project')</button>
                 </form>
