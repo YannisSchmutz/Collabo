@@ -64,7 +64,10 @@ class ProfileController extends Controller
         $profileViewmodel->setPicPath($user->profile_picture);
         $profileViewmodel->setProjects($project_names);
 
-        return view('profile')->with(['data' => $profileViewmodel]);
+        return view('profile')->with([
+            'data' => $profileViewmodel,
+            'infoMessage' => 'Hello again : )'
+        ]);
     }
 
     public function editPitchbox(Request $request)
