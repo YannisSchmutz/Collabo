@@ -49,10 +49,11 @@ class ProjectsController extends Controller
 
         $project = Project::find($id);
 
-        $projectInterests = $project->interests;
-        $projectInterestNames = [];
-        foreach ($projectInterests as $interest){
+        $projectInterestNames = [];  // Unfortunately the usage of this help-array is needed because PHP sucks!
+        $projectInterests = [];
+        foreach ($project->interests as $interest){
             array_push($projectInterestNames, $interest->name);
+            array_push($projectInterests, ['name' => $interest->name, 'id' => $interest->id]);
         }
 
         $allInterests = Interest::all();
@@ -72,7 +73,7 @@ class ProjectsController extends Controller
         $projectDetailViewModel->setCaption($project->caption);
         $projectDetailViewModel->setDescription($project->description);
         $projectDetailViewModel->setPicPath($project->project_picture);
-        $projectDetailViewModel->setProjectInterests($projectInterestNames);
+        $projectDetailViewModel->setProjectInterests($projectInterests);
         $projectDetailViewModel->setPossibleInterestsToAdd($possibleInterestsToAdd);
 
 
@@ -82,16 +83,34 @@ class ProjectsController extends Controller
     public function addInterest(Request $request, $lang, $id){
         //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
-            'interest_to_add' => 'required',
+            'interest_id_to_add' => 'required',
         ]);
+
         $project = Project::find($id);
         Gate::authorize('edit-project', $project);
 
         // TODO: Validate interest
         // todo: What happens if interest_id not in Interest-collection?
         // todo: What happens if interest_id already in User-Interest-collection?
-        $interestToAdd = Interest::find($request->interest_id);
+        $interestToAdd = Interest::find($request->interest_id_to_add);
         $project->interests()->save($interestToAdd);
+        $project->save();
+
+        return redirect(app()->getLocale().'/projects/'.$id.'/detail');
+    }
+
+    public function removeInterest(Request $request, $lang, $id){
+        //Todo: Send error-message to frontend if this fails
+        $this->validate($request, [
+            'interest_id_to_remove' => 'required',
+        ]);
+
+        $project = Project::find($id);
+        Gate::authorize('edit-project', $project);
+
+        // TODO: Validate interest
+        $interestToRemove = Interest::find($request->interest_id_to_remove);
+        $project->interests()->detach($interestToRemove);
         $project->save();
 
 
@@ -134,9 +153,14 @@ class ProjectsController extends Controller
             'pitch' => 'required',
             'profilepic' => 'nullable'
         ]);
-        // TODO: Be able to upload and save an image.
         $project = Project::find($id);
         Gate::authorize('edit-project', $project);
+        $file = $request->file('profilepic');
+        if($file != null){
+            $picname = $project->id.$file->getClientOriginalName();
+            $file->move('./pictures/', $picname);
+            $project->project_picture = "/pictures/".$picname;
+        }
 
         $project->pitch = $request->pitch;
         $project->save();
@@ -157,7 +181,7 @@ class ProjectsController extends Controller
         $project->caption = $request->caption;
         $project->name = $request->fullname;
         $project->save();
-        return redirect('projects/'.$id.'/detail');
+        return redirect(app()->getLocale().'/projects/'.$id.'/detail');
     }
 
     public function editDescriptionBox(Request $request, $lang, $id){

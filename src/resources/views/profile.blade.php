@@ -16,7 +16,8 @@
 
             @component('components/interestBox', ['interestsToDisplay' =>$data->getUserInterests(),
                                                   'possibleInterestsToAdd' =>$data->getPossibleInterestsToAdd(),
-                                                  'routeName' =>route('profileAddInterest', app()->getLocale()),
+                                                  'routeNameAdd' =>route('profileAddInterest', app()->getLocale()),
+                                                  'routeNameRemove' =>route('profileRemoveInterest', app()->getLocale()),
                                                   'langFile' => 'profiletext'])
                     @lang('profiletext.interests_title')
             @endcomponent

@@ -25,6 +25,7 @@
 <body>
     <header id="top">
         @include('components.navbar')
+        @include('components.messagees')
     </header>
     <main role="main" class="container">
         @yield('content')

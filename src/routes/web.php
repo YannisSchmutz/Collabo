@@ -40,6 +40,10 @@ Route::post('project/{id}/detail/addInterest', 'ProjectsController@addInterest')
     ->where(['id' => $validateId, 'language' => $validateLangage])
     ->name('projectAddInterest');
 
+Route::post('project/{id}/detail/removeInterest', 'ProjectsController@removeInterest')
+    ->where(['id' => $validateId, 'language' => $validateLangage])
+    ->name('projectRemoveInterest');
+
 Route::post('project/{id}/detail/editCaption', 'ProjectsController@editCaption')
     ->where(['id' => $validateId, 'language' => $validateLangage])
     ->name('projectEditCaption');
@@ -64,6 +68,7 @@ Route::post('profile/editCaption', 'ProfileController@editCaption')
 
 Route::post('profile/editPitchbox', 'ProfileController@editPitchbox')->name('profileEditPitchbox');
 Route::post('profile/addInterest', 'ProfileController@addInterest')->name('profileAddInterest');
+Route::post('profile/removeInterest', 'ProfileController@removeInterest')->name('profileRemoveInterest');
 
 
 // ***** Community *****

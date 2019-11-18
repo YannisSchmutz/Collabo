@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Model\Project;
 use App\Http\ViewModel\ProfileViewmodel;
 use App\Http\Model\Interest;
 use App\Http\ViewModel\ProjectListItemViewModel;
@@ -45,6 +46,14 @@ class ProfileController extends Controller
             array_push($projectViewModels, $projectViewModel);
         }
 
+        // Unfortunately the usage of this help-array is needed because PHP sucks!
+        $userInterestNames = [];
+        $userInterests = [];
+        foreach ($user->interests as $interest){
+            array_push($userInterestNames, $interest->name);
+            array_push($userInterests, ['name' => $interest->name, 'id' => $interest->id]);
+        }
+
         $allInterests = Interest::all();
         $possibleInterestsToAdd = [];
         foreach ($allInterests as $interest){
@@ -58,12 +67,15 @@ class ProfileController extends Controller
         $profileViewmodel->setPitch($user->pitch);
         $profileViewmodel->setName($user->name);
         $profileViewmodel->setCaption($user->caption);
-        $profileViewmodel->setUserInterests($userInterestNames);
+        $profileViewmodel->setUserInterests($userInterests);
         $profileViewmodel->setPossibleInterestsToAdd($possibleInterestsToAdd);
         $profileViewmodel->setPicPath($user->profile_picture);
         $profileViewmodel->setProjects($projectViewModels);
 
-        return view('profile')->with(['data' => $profileViewmodel]);
+        return view('profile')->with([
+            'data' => $profileViewmodel,
+            'infoMessage' => 'Hello again : )'
+        ]);
     }
 
     public function editPitchbox(Request $request)
@@ -73,10 +85,17 @@ class ProfileController extends Controller
         //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
             'pitch' => 'required',
-            'profilepic' => 'optional'
+            'profilepic' => 'nullable'
         ]);
         $user = auth()->user();
-        // TODO: Be able to upload and save an image.
+
+        $file = $request->file('profilepic');
+        if($file != null){
+            $picname = auth()->user()->getAuthIdentifier().$file->getClientOriginalName();
+            $file->move('./pictures/', $picname);
+            $user->profile_picture = "/pictures/".$picname;
+        }
+
         $user->pitch = $request->pitch;
         $user->save();
 
@@ -103,14 +122,31 @@ class ProfileController extends Controller
 
         //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
-            'interest_to_add' => 'required',
+            'interest_id_to_add' => 'required',
         ]);
         $user = auth()->user();
         // TODO: Validate interest
         // todo: What happens if interest_id not in Interest-collection?
         // todo: What happens if interest_id already in User-Interest-collection?
-        $interestToAdd = Interest::find($request->interest_id);
+        $interestToAdd = Interest::find($request->interest_id_to_add);
         $user->interests()->save($interestToAdd);
+        $user->save();
+
+        return redirect(app()->getLocale().'/profile');
+    }
+
+    public function removeInterest(Request $request){
+        Gate::authorize('edit-profile', $request->user());
+
+        //Todo: Send error-message to frontend if this fails
+        $this->validate($request, [
+            'interest_id_to_remove' => 'required',
+        ]);
+
+        $user = auth()->user();
+        // TODO: Validate interest
+        $interestToRemove = Interest::find($request->interest_id_to_remove);
+        $user->interests()->detach($interestToRemove);
         $user->save();
 
         return redirect(app()->getLocale().'/profile');
