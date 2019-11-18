@@ -52,10 +52,10 @@
             <div class="col-sm">
                 <ul class="navbar-nav border-left float-right">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('profile', ['language' => 'en']) }}">{{ __('EN') }}</a>
+                        <a class="nav-link" href="{{ route('main', ['language' => 'en']) }}">{{ __('EN') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('profile', ['language' => 'de']) }}">{{ __('DE') }}</a>
+                        <a class="nav-link" href="{{ route('main', ['language' => 'de']) }}">{{ __('DE') }}</a>
                     </li>
                 </ul>
             </div>

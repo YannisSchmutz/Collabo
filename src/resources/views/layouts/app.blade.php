@@ -27,6 +27,7 @@
         @include('components.navbar')
         @include('components.messagees')
     </header>
+    @yield('outside')
     <main role="main" class="container">
         @yield('content')
     </main>
