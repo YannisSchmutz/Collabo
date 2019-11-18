@@ -17,7 +17,8 @@
 
                 @component('components/interestBox', ['interestsToDisplay' =>$data->getProjectInterests(),
                                                       'possibleInterestsToAdd' =>$data->getPossibleInterestsToAdd(),
-                                                      'routeName' =>route('projectAddInterest', [app()->getLocale(), 'id' => $data->getId()]),
+                                                      'routeNameAdd' =>route('projectAddInterest', [app()->getLocale(), 'id' => $data->getId()]),
+                                                      'routeNameRemove' =>route('projectRemoveInterest', [app()->getLocale(), 'id' => $data->getId()]),
                                                       'langFile' => 'projecttext'])
                     @lang('projecttext.interests_title')
                 @endcomponent
