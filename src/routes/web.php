@@ -28,6 +28,7 @@ Route::get('home', 'PagesController@index');
 
 // ***** Projects *****
 Route::get('projects', 'ProjectsController@projects')->name('projects');
+
 Route::get('project/create', 'ProjectsController@create')->name('createProject');
 Route::post('project/store', 'ProjectsController@store')->name('storeProject');
 
@@ -55,6 +56,9 @@ Route::post('project/{id}/detail/editDescriptionBox', 'ProjectsController@editDe
     ->where(['id' => $validateId, 'language' => $validateLangage])
     ->name('projectEditDescriptionBox');
 
+Route::get('projects/{id}/unsubscribe', 'ProjectsController@unsubscribe')
+    ->where(['id' => $validateId, 'language' => $validateLangage])
+    ->name('projectunsubscribe');
 
 // ***** Profile *****
 Route::get('profile', 'ProfileController@index')->name('profile');
@@ -70,6 +74,7 @@ Route::post('profile/removeInterest', 'ProfileController@removeInterest')->name(
 // ***** Community *****
 Route::get('community', 'CommunityController@index')->name('community');
 Route::get('searchProject', 'CommunityController@searchProject')->name('searchProject');
+Route::get('searchProfile', 'CommunityController@searchProfile')->name('searchProfile');
 
 Route::get('swipe', 'PagesController@index')->name('swipe');
 Route::get('inbox', 'PagesController@index')->name('inbox');

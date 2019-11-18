@@ -22,9 +22,17 @@
                     @lang('profiletext.interests_title')
             @endcomponent
 
-            @component('components/projectList', ['data' =>$data->getProjects()])
-                    @lang('profiletext.projectsts_title')
-            @endcomponent
+                <div class="card mt-4 mb-4 p-2">
+                    <h3 class="card-title">@lang('profiletext.projectsts_title')</h3>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            @foreach ($data->getProjects() as $projectVm)
+                                @component('components/projectListItem',['projectVM' => $projectVm])
+                                @endcomponent
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
         </div>
     </div>
 </div>

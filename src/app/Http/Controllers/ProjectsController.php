@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Model\Interest;
 use App\Http\Model\Project;
 use App\Http\ViewModel\ProjectDetailViewModel;
+use App\Http\ViewModel\ProjectListItemViewModel;
 use App\Http\ViewModel\ProjectsViewModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -27,10 +28,13 @@ class ProjectsController extends Controller
         $ownedProjects = [];
         $relatedProjects = [];
         foreach(auth()->user()->projects as $project){
+            $projectListItemViewModel = new ProjectListItemViewModel();
+            $projectListItemViewModel->setProject($project);
+            $projectListItemViewModel->setIsRemovable(true);
             if($project->pivot->permission == 'owner') {
-                array_push ( $ownedProjects, $project);
+                array_push ( $ownedProjects, $projectListItemViewModel);
             }else {
-                array_push ( $relatedProjects, $project);
+                array_push ( $relatedProjects, $projectListItemViewModel);
             }
         }
 
@@ -188,5 +192,15 @@ class ProjectsController extends Controller
         $project->description = $request->descriptionArea;
         $project->save();
         return redirect(app()->getLocale().'/projects/'.$id.'/detail');
+    }
+
+    public function unsubscribe(Request $request, $lang, $id){
+        $project = auth()->user()->projects()->find($id);
+        if($project->pivot->permission == 'owner') {
+            $project->delete();
+        }
+        auth()->user()->projects()->detach($project);
+        auth()->user()->save();
+        return redirect(app()->getLocale().'/projects');
     }
 }

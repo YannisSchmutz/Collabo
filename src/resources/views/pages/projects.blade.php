@@ -4,8 +4,8 @@
     <div class="justify-content-center">
         <h3>{{ __('projecttext.my_projects') }}</h3>
         <ul class="list-group">
-            @foreach ($data->getOwnedProjects() as $project )
-                @component('components/projectListItem', ['project' =>$project])
+            @foreach ($data->getOwnedProjects() as $projectVm)
+                @component('components/projectListItem',['projectVM' => $projectVm])
                 @endcomponent
             @endforeach
         </ul>
@@ -24,8 +24,8 @@
     <div class="justify-content-center mt-3">
         <h3>{{ __('projecttext.related_projects') }}</h3>
         <ul class="list-group">
-            @foreach ($data->getRelatedProjects() as $project )
-                @component('components/projectListItem', ['project' =>$project])
+            @foreach ($data->getRelatedProjects() as $projectVm )
+                @component('components/projectListItem',['projectVM' => $projectVm])
                 @endcomponent
             @endforeach
         </ul>

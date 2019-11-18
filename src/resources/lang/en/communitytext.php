@@ -8,6 +8,6 @@ return [
     |--------------------------------------------------------------------------
     |
     */
-    'project_search' => 'Search for Projects',
-
+    'project_search' => 'Search for projects',
+    'profile_search' => 'Search for profiles'
 ];

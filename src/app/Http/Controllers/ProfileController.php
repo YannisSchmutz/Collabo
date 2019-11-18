@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Model\Project;
 use App\Http\ViewModel\ProfileViewmodel;
 use App\Http\Model\Interest;
+use App\Http\ViewModel\ProjectListItemViewModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -31,10 +32,18 @@ class ProfileController extends Controller
     {
         $user = auth()->user();
 
-        $user_projects = $user->projects;
-        $project_names = [];
-        foreach ($user_projects as $project){
-            array_push($project_names, $project->name);
+        $user_interests = $user->interests;
+        $userInterestNames = [];
+        foreach ($user_interests as $interest){
+            array_push($userInterestNames, $interest->name);
+        }
+
+        $projectViewModels = array();
+        foreach($user->projects as $project){
+            $projectViewModel = new ProjectListItemViewModel();
+            $projectViewModel->setProject($project);
+            $projectViewModel->setIsRemovable(true);
+            array_push($projectViewModels, $projectViewModel);
         }
 
         // Unfortunately the usage of this help-array is needed because PHP sucks!
@@ -54,7 +63,6 @@ class ProfileController extends Controller
                 array_push($possibleInterestsToAdd, ['name' => $interest->name, 'id' => $interest->id]);
             }
         }
-
         $profileViewmodel = new ProfileViewmodel();
         $profileViewmodel->setPitch($user->pitch);
         $profileViewmodel->setName($user->name);
@@ -62,7 +70,7 @@ class ProfileController extends Controller
         $profileViewmodel->setUserInterests($userInterests);
         $profileViewmodel->setPossibleInterestsToAdd($possibleInterestsToAdd);
         $profileViewmodel->setPicPath($user->profile_picture);
-        $profileViewmodel->setProjects($project_names);
+        $profileViewmodel->setProjects($projectViewModels);
 
         return view('profile')->with([
             'data' => $profileViewmodel,
