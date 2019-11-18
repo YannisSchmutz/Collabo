@@ -78,7 +78,7 @@ class ProfileController extends Controller
         $file = $request->file('profilepic');
         if($file != null){
             $picname = auth()->user()->getAuthIdentifier().$file->getClientOriginalName();
-            $file->move('/var/www/public/pictures/', $picname);
+            $file->move('./pictures/', $picname);
             $user->profile_picture = "/pictures/".$picname;
         }
 

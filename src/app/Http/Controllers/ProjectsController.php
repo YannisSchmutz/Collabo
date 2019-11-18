@@ -135,7 +135,7 @@ class ProjectsController extends Controller
         $file = $request->file('profilepic');
         if($file != null){
             $picname = $project->id.$file->getClientOriginalName();
-            $file->move('/var/www/public/pictures/', $picname);
+            $file->move('./pictures/', $picname);
             $project->project_picture = "/pictures/".$picname;
         }
 
