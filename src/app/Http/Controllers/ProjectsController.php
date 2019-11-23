@@ -9,7 +9,7 @@ use App\Http\ViewModel\ProjectListItemViewModel;
 use App\Http\ViewModel\ProjectsViewModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Route;;
+use Illuminate\Database\QueryException;
 
 class ProjectsController extends Controller
 {
@@ -77,11 +77,12 @@ class ProjectsController extends Controller
         $projectDetailViewModel->setPossibleInterestsToAdd($possibleInterestsToAdd);
 
 
-        return view('pages.project_detail')->with(['data' => $projectDetailViewModel]);
+        return view('pages.project_detail')->with([
+            'data' => $projectDetailViewModel,
+        ]);
     }
 
     public function addInterest(Request $request, $lang, $id){
-        //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
             'interest_id_to_add' => 'required',
         ]);
@@ -89,18 +90,27 @@ class ProjectsController extends Controller
         $project = Project::find($id);
         Gate::authorize('edit-project', $project);
 
-        // TODO: Validate interest
-        // todo: What happens if interest_id not in Interest-collection?
-        // todo: What happens if interest_id already in User-Interest-collection?
         $interestToAdd = Interest::find($request->interest_id_to_add);
-        $project->interests()->save($interestToAdd);
+        if ($interestToAdd == null){
+            // Interest with given ID does not exist
+            // Should not happen due to already being validated in frontend.
+            return redirect(app()->getLocale().'/projects/'.$id.'/detail')->with('error',
+                __('projecttext.interest_add_error'));
+        }
+
+        try {
+            $project->interests()->save($interestToAdd);
+        } catch (QueryException $e){
+            return redirect(app()->getLocale().'/projects/'.$id.'/detail')->with('error',
+                __('projecttext.interest_add_error'));
+        }
+
         $project->save();
 
         return redirect(app()->getLocale().'/projects/'.$id.'/detail');
     }
 
     public function removeInterest(Request $request, $lang, $id){
-        //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
             'interest_id_to_remove' => 'required',
         ]);
@@ -108,8 +118,13 @@ class ProjectsController extends Controller
         $project = Project::find($id);
         Gate::authorize('edit-project', $project);
 
-        // TODO: Validate interest
         $interestToRemove = Interest::find($request->interest_id_to_remove);
+        if ($interestToRemove == null){
+            // Interest with given ID does not exist
+            // Should not happen due to already being validated in frontend.
+            return redirect(app()->getLocale().'/projects/'.$id.'/detail')->with('error',
+                __('projecttext.interest_remove_error'));
+        }
         $project->interests()->detach($interestToRemove);
         $project->save();
 
@@ -122,13 +137,16 @@ class ProjectsController extends Controller
     }
 
     public function store(Request $request){
-
-        // TODO: Validate
-        // TODO: Make Image optional (nullable) but use "/pictures/general_placeholder.png" if there isn't any
-
         $user = auth()->user();
 
-        // TODO: Add missing parameters
+        $this->validate($request, [
+            'fullname' => 'required',
+            'pitch' => 'required',
+            'caption' => 'required',
+            'descriptionArea' => 'required',
+            'profilepic' => 'nullable',
+        ]);
+
         $new_project = new Project();
         $new_project->name = $request->fullname;
         $new_project->pitch = $request->pitch;
@@ -139,20 +157,31 @@ class ProjectsController extends Controller
         $new_project->save();
         // Save permission to the intermediate table.
         $new_project->users()->save($user, ['permission' => 'owner']);
-        // Needs the second save to save the intermediate table.
-        $new_project->save();
-        $id = $new_project->id;
 
+        $file = $request->file('profilepic');
+        //return $request->profilepic;
+        if($file != null){
+            //return "asfasf";
+            $picname = $new_project->id.$file->getClientOriginalName();
+            $file->move('./pictures/', $picname);
+            $new_project->project_picture = "/pictures/".$picname;
+        }
+
+        // Needs the second save to save the intermediate table
+        //  as well as the picture.
+        $new_project->save();
+
+        $id = $new_project->id;
         return redirect(app()->getLocale().'/projects/'.$id.'/detail');
     }
 
     public function editPitchbox(Request $request, $lang, $id)
     {
-        //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
             'pitch' => 'required',
             'profilepic' => 'nullable'
         ]);
+
         $project = Project::find($id);
         Gate::authorize('edit-project', $project);
         $file = $request->file('profilepic');
@@ -170,7 +199,6 @@ class ProjectsController extends Controller
 
     public function editCaption(Request $request, $lang, $id){
 
-        //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
             'fullname' => 'required',
             'caption' => 'required'
@@ -185,6 +213,10 @@ class ProjectsController extends Controller
     }
 
     public function editDescriptionBox(Request $request, $lang, $id){
+
+        $this->validate($request, [
+            'descriptionArea' => 'required',
+        ]);
 
         $project = Project::find($id);
         Gate::authorize('edit-project', $project);
