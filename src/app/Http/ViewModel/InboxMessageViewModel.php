@@ -10,8 +10,24 @@ class InboxMessageViewModel
    private $username;
    private $messagetype;
 
-   private $forwardId;
-   private $likeId;
+   private $projectId;
+   private $userId;
+
+    /**
+     * @return mixed
+     */
+    public function getUserId()
+    {
+        return $this->userId;
+    }
+
+    /**
+     * @param mixed $userId
+     */
+    public function setUserId($userId): void
+    {
+        $this->userId = $userId;
+    }
 
     /**
      * @return mixed
@@ -64,34 +80,16 @@ class InboxMessageViewModel
     /**
      * @return mixed
      */
-    public function getForwardId()
+    public function getProjectId()
     {
-        return $this->forwardId;
+        return $this->projectId;
     }
 
     /**
-     * @param mixed $forwardId
+     * @param mixed $projectId
      */
-    public function setForwardId($forwardId): void
+    public function setProjectId($projectId): void
     {
-        $this->forwardId = $forwardId;
+        $this->projectId = $projectId;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getLikeId()
-    {
-        return $this->likeId;
-    }
-
-    /**
-     * @param mixed $likeId
-     */
-    public function setLikeId($likeId): void
-    {
-        $this->likeId = $likeId;
-    }
-
-
 }

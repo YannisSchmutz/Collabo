@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Model\Project;
+use App\Http\Model\User;
 use App\Http\ViewModel\InboxMessageViewModel;
 use App\Http\ViewModel\ProfileViewmodel;
 use App\Http\Model\Interest;
@@ -41,8 +42,9 @@ class InboxController extends Controller
             if($like->is_liked_by_project()) {
                 $viewmodel = new InboxMessageViewModel();
                 $viewmodel->setMessagetype(self::USERMESSAGETYPE);
-                $viewmodel->setLikeId($like->Id);
-                //ToDo get Project for forward Id and projektname
+                $viewmodel->setProjectId($like->project_id);
+                $viewmodel->setUserId($like->user_id);
+                $viewmodel->setProjectname(Project::find($like->project_id)->name);
                 array_push ( $user_messages, $viewmodel);
             }
         }
@@ -53,9 +55,10 @@ class InboxController extends Controller
                     if($like->is_liked_by_user()) {
                         $viewmodel = new InboxMessageViewModel();
                         $viewmodel->setMessagetype(self::PROJECTMESSAGETYPE);
-                        $viewmodel->setLikeId($like->Id);
-                        //ToDo get User for forward Id and username
-                        //ToDo get Project for projektname
+                        $viewmodel->setProjectId($like->project_id);
+                        $viewmodel->setUserId($like->user_id);
+                        $viewmodel->setProjectname(Project::find($like->project_id)->name);
+                        $viewmodel->setUsername(User::find($like->user_id)->name);
                         array_push ( $project_messages, $viewmodel);
                     }
                 }
