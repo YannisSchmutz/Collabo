@@ -77,8 +77,9 @@ Route::get('searchProject', 'CommunityController@searchProject')->name('searchPr
 Route::get('searchProfile', 'CommunityController@searchProfile')->name('searchProfile');
 
 Route::get('swipe', 'PagesController@index')->name('swipe');
-Route::get('inbox', 'PagesController@index')->name('inbox');
+Route::get('inbox', 'InboxController@index')->name('inbox');
 Route::get('settings', 'PagesController@index')->name('settings');
+
 
 
 Auth::routes();

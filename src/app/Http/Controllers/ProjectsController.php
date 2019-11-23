@@ -31,7 +31,7 @@ class ProjectsController extends Controller
             $projectListItemViewModel = new ProjectListItemViewModel();
             $projectListItemViewModel->setProject($project);
             $projectListItemViewModel->setIsRemovable(true);
-            if($project->pivot->permission == 'owner') {
+            if($project->pivot->permission === 'owner') {
                 array_push ( $ownedProjects, $projectListItemViewModel);
             }else {
                 array_push ( $relatedProjects, $projectListItemViewModel);

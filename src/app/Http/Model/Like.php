@@ -16,4 +16,16 @@ class Like extends Model
     public function projects(){
         return $this->belongsTo('App\Http\Model\Project');
     }
+
+    public function has_matched(){
+        return $this->liked_by_user &&  $this->liked_by_project;
+    }
+
+    public function is_liked_by_user(){
+        return $this->liked_by_user &&  !$this->liked_by_project;
+    }
+
+    public function is_liked_by_project(){
+        return !$this->liked_by_user &&  $this->liked_by_project;
+    }
 }
