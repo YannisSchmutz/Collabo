@@ -45,6 +45,7 @@ class InboxController extends Controller
                 $viewmodel->setProjectId($like->project_id);
                 $viewmodel->setUserId($like->user_id);
                 $viewmodel->setProjectname(Project::find($like->project_id)->name);
+                $viewmodel->setUsername(User::find($like->user_id)->name);
                 array_push ( $user_messages, $viewmodel);
             }
         }
