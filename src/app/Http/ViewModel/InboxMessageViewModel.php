@@ -8,10 +8,27 @@ class InboxMessageViewModel
 {
    private $projectname;
    private $username;
+   private $picpath;
    private $messagetype;
 
    private $projectId;
    private $userId;
+
+    /**
+     * @return mixed
+     */
+    public function getPicpath()
+    {
+        return $this->picpath;
+    }
+
+    /**
+     * @param mixed $picpath
+     */
+    public function setPicpath($picpath): void
+    {
+        $this->picpath = $picpath;
+    }
 
     /**
      * @return mixed

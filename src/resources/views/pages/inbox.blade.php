@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    test
+    @foreach ($data as $message)
+        @component('components/inboxListItem', ['message' => $message])
+        @endcomponent
+    @endforeach
 @endsection

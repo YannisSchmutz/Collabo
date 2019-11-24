@@ -62,6 +62,10 @@ Route::get('projects/{id}/unsubscribe', 'ProjectsController@unsubscribe')
 
 // ***** Profile *****
 Route::get('profile', 'ProfileController@index')->name('profile');
+    Route::get('profile/{id}/detail', 'ProfileController@detail')
+        ->where(['id' => $validateId, 'language' => $validateLangage])
+        ->name('profiledetails');
+
 Route::post('profile/editCaption', 'ProfileController@editCaption')
     ->where(['language' => $validateLangage])
     ->name('profileEditCaption');

@@ -43,9 +43,20 @@ class InboxController extends Controller
                 $viewmodel = new InboxMessageViewModel();
                 $viewmodel->setMessagetype(self::USERMESSAGETYPE);
                 $viewmodel->setProjectId($like->project_id);
+
+                $user = User::find($like->user_id);
+                $project = Project::find($like->project_id);
+                $projectowner = null;
+
+                foreach($project->users as $projectmembers){
+                    if($projectmembers->pivot->permission == 'owner')
+                        $projectowner = $projectmembers;
+                }
+
                 $viewmodel->setUserId($like->user_id);
-                $viewmodel->setProjectname(Project::find($like->project_id)->name);
-                $viewmodel->setUsername(User::find($like->user_id)->name);
+                $viewmodel->setProjectname($project->name);
+                $viewmodel->setUsername($projectowner->name);
+                $viewmodel->setPicpath($project->project_picture);
                 array_push ( $user_messages, $viewmodel);
             }
         }
@@ -57,9 +68,14 @@ class InboxController extends Controller
                         $viewmodel = new InboxMessageViewModel();
                         $viewmodel->setMessagetype(self::PROJECTMESSAGETYPE);
                         $viewmodel->setProjectId($like->project_id);
+
+                        $project = Project::find($like->project_id);
+                        $user = User::find($like->user_id);
+
                         $viewmodel->setUserId($like->user_id);
-                        $viewmodel->setProjectname(Project::find($like->project_id)->name);
-                        $viewmodel->setUsername(User::find($like->user_id)->name);
+                        $viewmodel->setProjectname($project->name);
+                        $viewmodel->setUsername($user->name);
+                        $viewmodel->setPicpath($user->profile_picture);
                         array_push ( $project_messages, $viewmodel);
                     }
                 }
