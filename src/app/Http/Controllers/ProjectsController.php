@@ -201,6 +201,6 @@ class ProjectsController extends Controller
         }
         auth()->user()->projects()->detach($project);
         auth()->user()->save();
-        return redirect()->back()->with('successMessages', ['Success!']);
+        return redirect()->back();
     }
 }
