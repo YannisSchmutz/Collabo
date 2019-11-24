@@ -15,8 +15,7 @@
                         |
                         <a href="{{route('projectunsubscribe', [
                             app()->getLocale(),
-                            'id' => $projectVM->getProject()->id,
-                            'redirect' => $projectVM->getRedirect()
+                            'id' => $projectVM->getProject()->id
                          ])}}"><i class="fas fa-trash ml-2 mr-2"></i></a>
                     @endif
                 </li>

@@ -8,7 +8,6 @@ class ProjectListItemViewModel
 {
     private $project;
     private $isRemovable;
-    private $redirect;
 
     /**
      * @return mixed
@@ -40,22 +39,6 @@ class ProjectListItemViewModel
     public function setIsRemovable($isRemovable): void
     {
         $this->isRemovable = $isRemovable;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRedirect()
-    {
-        return $this->redirect;
-    }
-
-    /**
-     * @param mixed $redirect
-     */
-    public function setRedirect($redirect): void
-    {
-        $this->redirect = $redirect;
     }
 
 }
