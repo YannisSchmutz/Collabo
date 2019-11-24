@@ -13,8 +13,8 @@
                 </p>
                 <p>{{__('inbox_text.inbox_text_project', ['projectname' => $message->getProjectname(), 'username' => $message->getUsername()])}}</p>
             </div>
-            <a href="#" role="button" class="btn btn-success mr-2 p-4 text-center"><br><i class="far fa-check-circle "></i></a>
-            <a href="#" role="button" class="btn btn-danger mr-2 p-4"><br><i class="far fa-times-circle mt-auto"></i></a>
+            <a href="{{route('user_accept_project', [app()->getLocale(), 'userid' => $message->getUserId(), 'projectid' => $message->getProjectId()])}}" role="button" class="btn btn-success mr-2 p-4 text-center"><br><i class="far fa-check-circle "></i></a>
+            <a href="{{route('user_decline_project', [app()->getLocale(), 'userid' => $message->getUserId(), 'projectid' => $message->getProjectId()])}}" role="button" class="btn btn-danger mr-2 p-4"><br><i class="far fa-times-circle mt-auto"></i></a>
         @endif
 
         @if ($message->getMessagetype() == "PROJECT")
@@ -27,10 +27,8 @@
                 <p>{{__('inbox_text.inbox_text_project', ['projectname' => $message->getProjectname(), 'username' => $message->getUsername()])}}</p>
             </div>
 
-            <a href="#" role="button" class="btn btn-success mr-2 p-4"><br><br><i class="far fa-check-circle m-auto"></i></a>
-            <a href="#" role="button" class="btn btn-danger mr-2 p-4"><br><br><i class="far fa-times-circle m-auto"></i></a>
+            <a href="{{route('project_accept_user', [app()->getLocale(), 'userid' => $message->getUserId(), 'projectid' => $message->getProjectId()])}}" role="button" class="btn btn-success mr-2 p-4"><br><br><i class="far fa-check-circle m-auto"></i></a>
+            <a href="{{route('project_decline_user', [app()->getLocale(), 'userid' => $message->getUserId(), 'projectid' => $message->getProjectId()])}}" role="button" class="btn btn-danger mr-2 p-4"><br><br><i class="far fa-times-circle m-auto"></i></a>
         @endif
-
-
     </div>
 </li>

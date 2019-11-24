@@ -7,4 +7,5 @@ return [
 
     'inbox_title_project' => ':username wants to take part in project :projectname !',
     'inbox_text_project' => 'Do you want :username to help your project :projectname ?',
+    'empty_inbox' => "Empty Inbox, enjoy your time :-)",
 ];

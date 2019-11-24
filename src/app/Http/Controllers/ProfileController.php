@@ -80,7 +80,7 @@ class ProfileController extends Controller
 
     public function editPitchbox(Request $request)
     {
-        Gate::authorize('edit-profile', $request->user());
+        Gate::authorize('is-auth-user', $request->user());
 
         //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
@@ -104,7 +104,7 @@ class ProfileController extends Controller
     }
 
     public function editCaption(Request $request){
-        Gate::authorize('edit-profile', $request->user());
+        Gate::authorize('is-auth-user', $request->user());
         //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
             'fullname' => 'required',
@@ -118,7 +118,7 @@ class ProfileController extends Controller
     }
 
     public function addInterest(Request $request){
-        Gate::authorize('edit-profile', $request->user());
+        Gate::authorize('is-auth-user', $request->user());
 
         //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
@@ -136,7 +136,7 @@ class ProfileController extends Controller
     }
 
     public function removeInterest(Request $request){
-        Gate::authorize('edit-profile', $request->user());
+        Gate::authorize('is-auth-user', $request->user());
 
         //Todo: Send error-message to frontend if this fails
         $this->validate($request, [

@@ -87,7 +87,7 @@ class ProjectsController extends Controller
         ]);
 
         $project = Project::find($id);
-        Gate::authorize('edit-project', $project);
+        Gate::authorize('is-projectowner', $project);
 
         // TODO: Validate interest
         // todo: What happens if interest_id not in Interest-collection?
@@ -106,7 +106,7 @@ class ProjectsController extends Controller
         ]);
 
         $project = Project::find($id);
-        Gate::authorize('edit-project', $project);
+        Gate::authorize('is-projectowner', $project);
 
         // TODO: Validate interest
         $interestToRemove = Interest::find($request->interest_id_to_remove);
@@ -154,7 +154,7 @@ class ProjectsController extends Controller
             'profilepic' => 'nullable'
         ]);
         $project = Project::find($id);
-        Gate::authorize('edit-project', $project);
+        Gate::authorize('is-projectowner', $project);
         $file = $request->file('profilepic');
         if($file != null){
             $picname = $project->id.$file->getClientOriginalName();
@@ -176,7 +176,7 @@ class ProjectsController extends Controller
             'caption' => 'required'
         ]);
         $project = Project::find($id);
-        Gate::authorize('edit-project', $project);
+        Gate::authorize('is-projectowner', $project);
 
         $project->caption = $request->caption;
         $project->name = $request->fullname;
@@ -187,7 +187,7 @@ class ProjectsController extends Controller
     public function editDescriptionBox(Request $request, $lang, $id){
 
         $project = Project::find($id);
-        Gate::authorize('edit-project', $project);
+        Gate::authorize('is-projectowner', $project);
 
         $project->description = $request->descriptionArea;
         $project->save();

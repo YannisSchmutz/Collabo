@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Model\Like;
 use App\Http\Model\Project;
 use App\Http\Model\User;
+use App\Http\Model\UserProject;
 use App\Http\ViewModel\InboxMessageViewModel;
 use App\Http\ViewModel\ProfileViewmodel;
 use App\Http\Model\Interest;
@@ -84,5 +86,52 @@ class InboxController extends Controller
 
         $messages = array_merge($user_messages, $project_messages);
         return view('pages.inbox')->with(['data' => $messages]);
+    }
+
+    public function user_accept_project($lang, $userid, $projectid)
+    {
+        $user = User::find($userid);
+        Gate::authorize('is-auth-user', $user);
+
+        Like::where('user_id', '=',$userid)
+            ->where('project_id', '=', $projectid)
+            ->update(['liked_by_user' => true]);
+
+        UserProject::create(['user_id' => $userid, 'project_id' => $projectid, 'permission' => "readonly"]);
+        return redirect(app()->getLocale().'/inbox');
+    }
+
+    public function project_accept_user($lang, $userid, $projectid)
+    {
+        $project = Project::find($projectid);
+        Gate::authorize('is-projectowner', $project);
+
+        Like::where('user_id', '=',$userid)
+            ->where('project_id', '=', $projectid)
+            ->update(['liked_by_project' => true]);
+        UserProject::create(['user_id' => $userid, 'project_id' => $projectid, 'permission' => "readonly"]);
+        return redirect(app()->getLocale().'/inbox');
+    }
+
+    public function user_decline_project($lang, $userid, $projectid)
+    {
+        $user = User::find($userid);
+        Gate::authorize('is-auth-user', $user);
+
+        Like::where('user_id', '=',$userid)
+            ->where('project_id', '=', $projectid)
+            ->delete();
+        return redirect(app()->getLocale().'/inbox');
+    }
+
+    public function project_decline_user($lang, $userid, $projectid)
+    {
+        $project = Project::find($projectid);
+        Gate::authorize('is-projectowner', $project);
+
+        Like::where('user_id', '=',$userid)
+            ->where('project_id', '=', $projectid)
+            ->delete();
+        return redirect(app()->getLocale().'/inbox');
     }
 }

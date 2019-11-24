@@ -80,6 +80,21 @@ Route::get('community', 'CommunityController@index')->name('community');
 Route::get('searchProject', 'CommunityController@searchProject')->name('searchProject');
 Route::get('searchProfile', 'CommunityController@searchProfile')->name('searchProfile');
 
+// ***** Inbox *****
+Route::get('inbox', 'InboxController@index')->name('inbox');
+Route::get('inbox/accu2p/{userid}/{projectid}', 'InboxController@user_accept_project')
+    ->where(['userid' => $validateId, 'language' => $validateLangage, 'projectid' => $validateId])
+    ->name('user_accept_project');
+Route::get('inbox/decu2p/{userid}/{projectid}', 'InboxController@project_accept_user')
+    ->where(['userid' => $validateId, 'language' => $validateLangage, 'projectid' => $validateId])
+    ->name('project_accept_user');
+Route::get('inbox/accp2u/{userid}/{projectid}', 'InboxController@user_decline_project')
+    ->where(['userid' => $validateId, 'language' => $validateLangage, 'projectid' => $validateId])
+    ->name('user_decline_project');
+Route::get('inbox/decp2u/{userid}/{projectid}', 'InboxController@project_decline_user')
+    ->where(['userid' => $validateId, 'language' => $validateLangage, 'projectid' => $validateId])
+    ->name('project_decline_user');
+
 Route::get('swipe', 'PagesController@index')->name('swipe');
 Route::get('inbox', 'InboxController@index')->name('inbox');
 Route::get('settings', 'PagesController@index')->name('settings');
