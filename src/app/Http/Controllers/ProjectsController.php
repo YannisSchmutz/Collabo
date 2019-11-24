@@ -36,6 +36,7 @@ class ProjectsController extends Controller
             }else {
                 array_push ( $relatedProjects, $projectListItemViewModel);
             }
+            $projectListItemViewModel->setRedirect('projects');
         }
 
         $projectsViewmodel = new ProjectsViewModel();
@@ -201,6 +202,11 @@ class ProjectsController extends Controller
         }
         auth()->user()->projects()->detach($project);
         auth()->user()->save();
-        return redirect(app()->getLocale().'/projects');
+
+        $redirect = 'projects';
+        if($request->input('redirect') != null){
+            $redirect = $request->input('redirect');
+        }
+        return redirect(\route($redirect, app()->getLocale()));
     }
 }

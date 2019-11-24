@@ -82,6 +82,7 @@ class CommunityController extends Controller
             $projectViewModel->setIsRemovable(
                 in_array($project->id, $removableProjectIds)
             );
+            $projectViewModel->setRedirect('community');
             array_push($projectViewModels, $projectViewModel);
         }
 

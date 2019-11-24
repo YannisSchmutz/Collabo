@@ -43,6 +43,7 @@ class ProfileController extends Controller
             $projectViewModel = new ProjectListItemViewModel();
             $projectViewModel->setProject($project);
             $projectViewModel->setIsRemovable(true);
+            $projectViewModel->setRedirect('profile');
             array_push($projectViewModels, $projectViewModel);
         }
 
