@@ -12,6 +12,11 @@
         @endif
     </div>
     <div class="alert alert-danger" role="alert">
+        @if(count($errors) > 0)
+            @foreach($errors->all() as $message)
+                <p>{{$message}}</p>
+            @endforeach
+        @endif
         @if(session()->has('errorMessages'))
             @foreach(session('errorMessages') as $message)
                 <p>{{$message}}</p>

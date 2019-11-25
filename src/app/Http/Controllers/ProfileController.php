@@ -8,6 +8,7 @@ use App\Http\Model\User;
 use App\Http\ViewModel\ProfileViewmodel;
 use App\Http\Model\Interest;
 use App\Http\ViewModel\ProjectListItemViewModel;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -75,8 +76,7 @@ class ProfileController extends Controller
         $profileViewmodel->setProjects($projectViewModels);
 
         return view('profile')->with([
-            'data' => $profileViewmodel,
-            'infoMessages' => ['Hello again : )']
+            'data' => $profileViewmodel
         ]);
     }
 
@@ -134,7 +134,6 @@ class ProfileController extends Controller
     {
         Gate::authorize('is-auth-user', $request->user());
 
-        //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
             'pitch' => 'required',
             'profilepic' => 'nullable'
@@ -151,11 +150,12 @@ class ProfileController extends Controller
         $user->pitch = $request->pitch;
         $user->save();
 
-        return redirect(app()->getLocale().'/profile');
-        //return $request->all();
+        return redirect(app()->getLocale().'/profile')->with('successMessages', ['Pitch box updated']);
     }
 
     public function editCaption(Request $request){
+        Gate::authorize('edit-profile', $request->user());
+
         Gate::authorize('is-auth-user', $request->user());
         //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
@@ -172,16 +172,24 @@ class ProfileController extends Controller
     public function addInterest(Request $request){
         Gate::authorize('is-auth-user', $request->user());
 
-        //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
             'interest_id_to_add' => 'required',
         ]);
         $user = auth()->user();
-        // TODO: Validate interest
-        // todo: What happens if interest_id not in Interest-collection?
-        // todo: What happens if interest_id already in User-Interest-collection?
         $interestToAdd = Interest::find($request->interest_id_to_add);
-        $user->interests()->save($interestToAdd);
+        if ($interestToAdd == null){
+            // Interest with given ID does not exist
+            // Should not happen due to already being validated in frontend.
+            return redirect(app()->getLocale().'/profile')->with('errorMessages',
+                [__('profiletext.interest_add_error')]);
+        }
+        try {
+            $user->interests()->save($interestToAdd);
+        } catch (QueryException $e){
+            return redirect(app()->getLocale().'/profile')->with('errorMessages',
+                [__('profiletext.interest_add_error')]);
+        }
+
         $user->save();
 
         return redirect(app()->getLocale().'/profile');
@@ -190,14 +198,18 @@ class ProfileController extends Controller
     public function removeInterest(Request $request){
         Gate::authorize('is-auth-user', $request->user());
 
-        //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
             'interest_id_to_remove' => 'required',
         ]);
 
         $user = auth()->user();
-        // TODO: Validate interest
         $interestToRemove = Interest::find($request->interest_id_to_remove);
+        if ($interestToRemove == null){
+            // Interest with given ID does not exist
+            // Should not happen due to already being validated in frontend.
+            return redirect(app()->getLocale().'/profile')->with('errorMessages',
+                [__('profiletext.interest_remove_error')]);
+        }
         $user->interests()->detach($interestToRemove);
         $user->save();
 
