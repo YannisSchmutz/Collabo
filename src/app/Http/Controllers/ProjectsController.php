@@ -94,15 +94,15 @@ class ProjectsController extends Controller
         if ($interestToAdd == null){
             // Interest with given ID does not exist
             // Should not happen due to already being validated in frontend.
-            return redirect(app()->getLocale().'/projects/'.$id.'/detail')->with('error',
-                __('projecttext.interest_add_error'));
+            return redirect(app()->getLocale().'/projects/'.$id.'/detail')->with('errorMessages',
+                [__('projecttext.interest_add_error')]);
         }
 
         try {
             $project->interests()->save($interestToAdd);
         } catch (QueryException $e){
-            return redirect(app()->getLocale().'/projects/'.$id.'/detail')->with('error',
-                __('projecttext.interest_add_error'));
+            return redirect(app()->getLocale().'/projects/'.$id.'/detail')->with('errorMessages',
+                [__('projecttext.interest_add_error')]);
         }
 
         $project->save();
@@ -122,8 +122,8 @@ class ProjectsController extends Controller
         if ($interestToRemove == null){
             // Interest with given ID does not exist
             // Should not happen due to already being validated in frontend.
-            return redirect(app()->getLocale().'/projects/'.$id.'/detail')->with('error',
-                __('projecttext.interest_remove_error'));
+            return redirect(app()->getLocale().'/projects/'.$id.'/detail')->with('errorMessages',
+                [__('projecttext.interest_remove_error')]);
         }
         $project->interests()->detach($interestToRemove);
         $project->save();
@@ -139,13 +139,18 @@ class ProjectsController extends Controller
     public function store(Request $request){
         $user = auth()->user();
 
-        $this->validate($request, [
-            'fullname' => 'required',
-            'pitch' => 'required',
-            'caption' => 'required',
-            'descriptionArea' => 'required',
-            'profilepic' => 'nullable',
-        ]);
+        $errorMessages = [];
+        $this->validate(
+            $request,
+            [
+                'fullname' => 'required',
+                'pitch' => 'required',
+                'caption' => 'required',
+                'descriptionArea' => 'required',
+                'profilepic' => 'nullable',
+            ],
+            $errorMessages
+        );
 
         $new_project = new Project();
         $new_project->name = $request->fullname;
@@ -172,7 +177,7 @@ class ProjectsController extends Controller
         $new_project->save();
 
         $id = $new_project->id;
-        return redirect(app()->getLocale().'/projects/'.$id.'/detail');
+        return redirect(app()->getLocale().'/projects/'.$id.'/detail')->with('errorMessages', $errorMessages);
     }
 
     public function editPitchbox(Request $request, $lang, $id)
@@ -233,6 +238,6 @@ class ProjectsController extends Controller
         }
         auth()->user()->projects()->detach($project);
         auth()->user()->save();
-        return redirect(app()->getLocale().'/projects');
+        return redirect()->back();
     }
 }

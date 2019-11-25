@@ -74,7 +74,7 @@ class ProfileController extends Controller
         $profileViewmodel->setProjects($projectViewModels);
 
         return view('profile')->with([
-            'data' => $profileViewmodel,
+            'data' => $profileViewmodel
         ]);
     }
 
@@ -98,7 +98,7 @@ class ProfileController extends Controller
         $user->pitch = $request->pitch;
         $user->save();
 
-        return redirect(app()->getLocale().'/profile')->with('info', 'Pitch box updated');
+        return redirect(app()->getLocale().'/profile')->with('successMessages', ['Pitch box updated']);
     }
 
     public function editCaption(Request $request){
@@ -126,14 +126,14 @@ class ProfileController extends Controller
         if ($interestToAdd == null){
             // Interest with given ID does not exist
             // Should not happen due to already being validated in frontend.
-            return redirect(app()->getLocale().'/profile')->with('error',
-                __('profiletext.interest_add_error'));
+            return redirect(app()->getLocale().'/profile')->with('errorMessages',
+                [__('profiletext.interest_add_error')]);
         }
         try {
             $user->interests()->save($interestToAdd);
         } catch (QueryException $e){
-            return redirect(app()->getLocale().'/profile')->with('error',
-                __('profiletext.interest_add_error'));
+            return redirect(app()->getLocale().'/profile')->with('errorMessages',
+                [__('profiletext.interest_add_error')]);
         }
 
         $user->save();
@@ -153,8 +153,8 @@ class ProfileController extends Controller
         if ($interestToRemove == null){
             // Interest with given ID does not exist
             // Should not happen due to already being validated in frontend.
-            return redirect(app()->getLocale().'/profile')->with('error',
-                __('profiletext.interest_remove_error'));
+            return redirect(app()->getLocale().'/profile')->with('errorMessages',
+                [__('profiletext.interest_remove_error')]);
         }
         $user->interests()->detach($interestToRemove);
         $user->save();

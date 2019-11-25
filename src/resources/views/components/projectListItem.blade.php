@@ -13,7 +13,10 @@
                     <a href="{{route('projectsdetails', [app()->getLocale(), 'id' => $projectVM->getProject()->id])}}"><i class="fas fa-eye ml-2 mr-2"></i></a>
                     @if ($projectVM->getIsRemovable())
                         |
-                        <a href="{{route('projectunsubscribe', [app()->getLocale(), 'id' => $projectVM->getProject()->id])}}"><i class="fas fa-trash ml-2 mr-2"></i></a>
+                        <a href="{{route('projectunsubscribe', [
+                            app()->getLocale(),
+                            'id' => $projectVM->getProject()->id
+                         ])}}"><i class="fas fa-trash ml-2 mr-2"></i></a>
                     @endif
                 </li>
             </ul>

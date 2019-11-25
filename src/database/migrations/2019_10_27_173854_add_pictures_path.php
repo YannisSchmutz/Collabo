@@ -14,7 +14,7 @@ class AddPicturesPath extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('profile_picture');
+            $table->string('profile_picture')->default('/pictures/general_placeholder.png');
         });
 
         Schema::table('projects', function (Blueprint $table) {
