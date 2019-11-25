@@ -14,7 +14,7 @@ class AddCaptionToUsersAndProjectsTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('caption');
+            $table->string('caption')->nullable();
         });
 
         Schema::table('projects', function (Blueprint $table) {

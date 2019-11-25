@@ -202,7 +202,7 @@ class ProjectsController extends Controller
         }
         auth()->user()->projects()->detach($project);
         auth()->user()->save();
-        return redirect(app()->getLocale().'/projects');
+        return redirect()->back();
     }
 
     public function collab(Request $request, $lang, $projectid){

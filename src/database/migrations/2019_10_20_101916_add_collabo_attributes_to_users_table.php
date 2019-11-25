@@ -15,8 +15,8 @@ class AddCollaboAttributesToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('surname');
-            $table->mediumText('pitch');
-            $table->longText('description');
+            $table->mediumText('pitch')->nullable();
+            $table->longText('description')->nullable();
         });
     }
 

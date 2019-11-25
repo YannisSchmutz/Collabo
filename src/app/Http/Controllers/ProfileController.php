@@ -76,7 +76,7 @@ class ProfileController extends Controller
 
         return view('profile')->with([
             'data' => $profileViewmodel,
-            'infoMessage' => 'Hello again : )'
+            'infoMessages' => ['Hello again : )']
         ]);
     }
 
