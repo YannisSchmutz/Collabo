@@ -236,7 +236,12 @@ class ProfileController extends Controller
             $projectListItemViewModel = new ProjectListItemViewModel();
             $projectListItemViewModel->setProject($project);
             $projectListItemViewModel->setIsRemovable(true);
-            if($project->pivot->permission === 'owner') {
+            $isAlready = false;
+            foreach ($project->users as $user)
+                if($user->id == $userid)
+                    $isAlready = true;
+
+            if($project->pivot->permission === 'owner' && !$isAlready) {
                 array_push ( $ownedProjects, $projectListItemViewModel);
             }
         }

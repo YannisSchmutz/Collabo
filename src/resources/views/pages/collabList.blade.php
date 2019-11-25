@@ -17,7 +17,9 @@
 
     @endforeach
     @if(count($data) <= 0)
-    <h1>{{__('collabList_text.no_projects')}}</h1>
+        <div class="jumbotron">
+            <h1>{{__('collabList_text.no_projects')}}</h1>
+        </div>
     @endif
 
 @endsection

@@ -6,7 +6,9 @@
         @endcomponent
     @endforeach
     @if(count($data) <= 0)
-    <h1>{{__('inbox_text.empty_inbox')}}</h1>
+        <div class="jumbotron">
+            <h1>{{__('inbox_text.empty_inbox')}}</h1>
+        </div>
     @endif
 
 @endsection
