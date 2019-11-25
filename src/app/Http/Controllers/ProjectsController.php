@@ -210,10 +210,19 @@ class ProjectsController extends Controller
         $project = Project::find($projectid);
         if($project == null)
             return redirect(app()->getLocale().'/community');
+
+        foreach($project->users as $projUser){
+            if($projUser->id === $user->id)
+                return redirect(app()->getLocale().'/community');
+        }
+
         Like::firstOrCreate(['user_id' => $user->id,
             'project_id' => $project->id,
-            'liked_by_user' => true,
             ]);
+        Like::where(['user_id' => $user->id,
+            'project_id' => $project->id,
+        ])->update(['liked_by_user' => true,
+            'liked_by_project' => false,]);
 
         return redirect(app()->getLocale().'/community');
     }

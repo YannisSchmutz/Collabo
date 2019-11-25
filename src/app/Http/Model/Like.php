@@ -9,6 +9,8 @@ class Like extends Model
     // Table name
     protected $table = 'likes';
 
+    protected $fillable = ['user_id', 'project_id', 'liked_by_user', 'liked_by_project'];
+
     public function users(){
         return $this->belongsTo('AppHttp\Model\\User');
     }

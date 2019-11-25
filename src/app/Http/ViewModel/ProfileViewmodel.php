@@ -6,6 +6,7 @@ namespace App\Http\ViewModel;
 
 class ProfileViewmodel
 {
+    private $id;
     private $name;
     private $caption;
     private $picPath;
@@ -13,6 +14,22 @@ class ProfileViewmodel
     private $userInterests;
     private $possibleInterestsToAdd;
     private $projects;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
 
     /**
      * @return mixed

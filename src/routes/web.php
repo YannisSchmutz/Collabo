@@ -74,11 +74,12 @@ Route::get('u2pcollab/{projectid}', 'ProjectsController@collab')
     ->where(['projectid' => $validateId, 'language' => $validateLangage])
     ->name('u2pcollab');
 
-Route::get('p2ucollab/{projectid}', 'ProfileController@collab')
-    ->where(['projectid' => $validateId, 'language' => $validateLangage])
+Route::get('p2ucollab/{userid}/{projectid}', 'ProfileController@collab')
+    ->where(['projectid' => $validateId, 'userid' => $validateId,  'language' => $validateLangage])
     ->name('p2ucollab_selected');
 
-Route::get('p2ucollab/', 'ProfileController@collablist')
+Route::get('p2ucollab/{userid}', 'ProfileController@collablist')
+    ->where(['userid' => $validateId, 'language' => $validateLangage])
     ->name('p2ucollab');
 
 
