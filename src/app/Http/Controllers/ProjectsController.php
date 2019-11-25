@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Model\Interest;
+use App\Http\Model\Like;
 use App\Http\Model\Project;
 use App\Http\ViewModel\ProjectDetailViewModel;
 use App\Http\ViewModel\ProjectListItemViewModel;
@@ -202,5 +203,18 @@ class ProjectsController extends Controller
         auth()->user()->projects()->detach($project);
         auth()->user()->save();
         return redirect(app()->getLocale().'/projects');
+    }
+
+    public function collab(Request $request, $lang, $projectid){
+        $user = auth()->user();
+        $project = Project::find($projectid);
+        if($project == null)
+            return redirect(app()->getLocale().'/community');
+        Like::firstOrCreate(['user_id' => $user->id,
+            'project_id' => $project->id,
+            'liked_by_user' => true,
+            ]);
+
+        return redirect(app()->getLocale().'/community');
     }
 }

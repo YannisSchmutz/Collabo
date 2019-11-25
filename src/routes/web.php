@@ -70,6 +70,18 @@ Route::post('profile/editCaption', 'ProfileController@editCaption')
     ->where(['language' => $validateLangage])
     ->name('profileEditCaption');
 
+Route::get('u2pcollab/{projectid}', 'ProjectsController@collab')
+    ->where(['projectid' => $validateId, 'language' => $validateLangage])
+    ->name('u2pcollab');
+
+Route::get('p2ucollab/{projectid}', 'ProfileController@collab')
+    ->where(['projectid' => $validateId, 'language' => $validateLangage])
+    ->name('p2ucollab_selected');
+
+Route::get('p2ucollab/', 'ProfileController@collablist')
+    ->name('p2ucollab');
+
+
 Route::post('profile/editPitchbox', 'ProfileController@editPitchbox')->name('profileEditPitchbox');
 Route::post('profile/addInterest', 'ProfileController@addInterest')->name('profileAddInterest');
 Route::post('profile/removeInterest', 'ProfileController@removeInterest')->name('profileRemoveInterest');

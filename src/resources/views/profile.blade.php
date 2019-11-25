@@ -5,7 +5,8 @@
     <div class="row justify-content-center">
         <div class="col-md-3">
             @component('components/pitchBox', ['picPath' =>$data->getPicPath(), 'routeName' => route('profileEditPitchbox', app()->getLocale()),
-                                               'langFile' => 'profiletext'])
+                                               'langFile' => 'profiletext',
+                                               'collabRoute' => route('p2ucollab', app()->getLocale())])
                 {{$data->getPitch()}}
             @endcomponent
         </div>
@@ -18,7 +19,8 @@
                                                   'possibleInterestsToAdd' =>$data->getPossibleInterestsToAdd(),
                                                   'routeNameAdd' =>route('profileAddInterest', app()->getLocale()),
                                                   'routeNameRemove' =>route('profileRemoveInterest', app()->getLocale()),
-                                                  'langFile' => 'profiletext'])
+                                                  'langFile' => 'profiletext',
+                                                  ])
                     @lang('profiletext.interests_title')
             @endcomponent
 
