@@ -22,7 +22,7 @@ Route::group(['prefix' => '{language}'], function () {
     $validateLangage = '[a-z]{2,8}';
     $validateId = '[0-9]+';
 
-Route::get ('/', 'PagesController@index');
+Route::get ('/', 'PagesController@index')->name('main');
 Route::get('home', 'PagesController@index');
 
 
