@@ -18,5 +18,7 @@ return [
     'pic_form' => 'Project picture:',
     'interests_placeholder' => 'Project interests to add...',
     'create_new_project' => 'Create new project',
+    'interest_add_error' => 'Given interest could not be added',
+    'interest_remove_error' => 'Given interest could not be removed',
 
 ];
