@@ -13,8 +13,12 @@ footer{
     margin-bottom: 1rem;
 }
 
-#messages{
+#messages div{
     display: none;
+}
+
+#messages p{
+    margin: 0;
 }
 
 .hiddenForm {
