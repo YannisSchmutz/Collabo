@@ -17,4 +17,10 @@ return [
     'interests_placeholder' => 'Benutzer Interessen hinzufügen...',
     'interest_add_error' => 'Interesse konnte nicht hinzugefügt werden',
     'interest_remove_error' => 'Interesse konnte nicht entfehrnt werden',
+    'members' => 'Mitglieder',
+    'permission' => 'Berechtigung',
+    'owner' => 'Besitzer',
+    'manager' => 'Manager (Administration, Entwicklung)',
+    'reporter' => 'Reporter (Entwicklung)',
+    'readonly' => 'Nur Lesen',
 ];

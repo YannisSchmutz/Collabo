@@ -56,6 +56,10 @@ Route::post('project/{id}/detail/editDescriptionBox', 'ProjectsController@editDe
     ->where(['id' => $validateId, 'language' => $validateLangage])
     ->name('projectEditDescriptionBox');
 
+Route::post('project/{id}/detail/editPermissions', 'ProjectsController@editPermissions')
+    ->where(['id' => $validateId, 'language' => $validateLangage])
+    ->name('projectEditPermissions');
+
 Route::get('projects/{id}/unsubscribe', 'ProjectsController@unsubscribe')
     ->where(['id' => $validateId, 'language' => $validateLangage])
     ->name('projectunsubscribe');

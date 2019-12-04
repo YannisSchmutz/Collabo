@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Model\Interest;
 use App\Http\Model\Project;
+use App\Http\Model\UserProject;
 use App\Http\ViewModel\ProjectDetailViewModel;
 use App\Http\ViewModel\ProjectListItemViewModel;
 use App\Http\ViewModel\ProjectsViewModel;
@@ -66,6 +67,13 @@ class ProjectsController extends Controller
             }
         }
 
+        $memberRoles = [
+            'owner',
+            'manager',
+            'reporter',
+            'readonly'
+        ];
+
         $projectDetailViewModel = new ProjectDetailViewModel();
         $projectDetailViewModel->setId($project->id);
         $projectDetailViewModel->setName($project->name);
@@ -75,6 +83,8 @@ class ProjectsController extends Controller
         $projectDetailViewModel->setPicPath($project->project_picture);
         $projectDetailViewModel->setProjectInterests($projectInterests);
         $projectDetailViewModel->setPossibleInterestsToAdd($possibleInterestsToAdd);
+        $projectDetailViewModel->setMembers($project->users);
+        $projectDetailViewModel->setPossiblePermissions($memberRoles);
 
 
         return view('pages.project_detail')->with([
@@ -229,6 +239,10 @@ class ProjectsController extends Controller
         $project->description = $request->descriptionArea;
         $project->save();
         return redirect(app()->getLocale().'/projects/'.$id.'/detail');
+    }
+
+    public function editPermissions(Request $request, $lang, $id){
+
     }
 
     public function unsubscribe(Request $request, $lang, $id){

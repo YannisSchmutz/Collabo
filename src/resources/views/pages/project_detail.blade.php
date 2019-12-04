@@ -26,6 +26,8 @@
                 @component('components/descriptionBox', ['text' =>$data->getDescription(), 'routeName' =>route('projectEditDescriptionBox', [app()->getLocale(), 'id' => $data->getId()])])
                     @lang('projecttext.description_title')
                 @endcomponent
+                @component('components/projectMemberList', ['members' =>$data->getMembers(), 'permissions' => $data->getPossiblePermissions(), 'routeName' =>route('projectEditPermissions', [app()->getLocale(), 'id' => $data->getId()])])
+                @endcomponent
             </div>
         </div>
     </div>
