@@ -6,7 +6,8 @@
         <div class="row justify-content-center">
             <div class="col-md-3">
                 @component('components/pitchBox', ['picPath' =>$data->getPicPath(), 'routeName' =>route('projectEditPitchbox', [app()->getLocale(), 'id' => $data->getId()]),
-                                                   'langFile' => 'projecttext'])
+                                                   'langFile' => 'projecttext',
+                                                   'collabRoute' => route('u2pcollab', [app()->getLocale(), 'projectid' => $data->getId()])])
                     {{$data->getPitch()}}
                 @endcomponent
             </div>
@@ -19,7 +20,8 @@
                                                       'possibleInterestsToAdd' =>$data->getPossibleInterestsToAdd(),
                                                       'routeNameAdd' =>route('projectAddInterest', [app()->getLocale(), 'id' => $data->getId()]),
                                                       'routeNameRemove' =>route('projectRemoveInterest', [app()->getLocale(), 'id' => $data->getId()]),
-                                                      'langFile' => 'projecttext'])
+                                                      'langFile' => 'projecttext',
+                                                      ])
                     @lang('projecttext.interests_title')
                 @endcomponent
 

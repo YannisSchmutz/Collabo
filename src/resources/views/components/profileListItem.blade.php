@@ -10,7 +10,7 @@
         <div class="col-sm-3">
             <ul class="float-right navbar-nav">
                 <li class="nav-item">
-                    <a href="/profile/{{$profile->id}}/detail"><i class="fas fa-eye ml-2 mr-2"></i></a>
+                    <a href="{{route('profiledetails', [app()->getLocale(), 'id' => $profile->id])}}"><i class="fas fa-eye ml-2 mr-2"></i></a>
                 </li>
             </ul>
         </div>

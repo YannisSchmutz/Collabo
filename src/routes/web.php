@@ -62,9 +62,26 @@ Route::get('projects/{id}/unsubscribe', 'ProjectsController@unsubscribe')
 
 // ***** Profile *****
 Route::get('profile', 'ProfileController@index')->name('profile');
+    Route::get('profile/{id}/detail', 'ProfileController@detail')
+        ->where(['id' => $validateId, 'language' => $validateLangage])
+        ->name('profiledetails');
+
 Route::post('profile/editCaption', 'ProfileController@editCaption')
     ->where(['language' => $validateLangage])
     ->name('profileEditCaption');
+
+Route::get('u2pcollab/{projectid}', 'ProjectsController@collab')
+    ->where(['projectid' => $validateId, 'language' => $validateLangage])
+    ->name('u2pcollab');
+
+Route::get('p2ucollab/{userid}/{projectid}', 'ProfileController@collab')
+    ->where(['projectid' => $validateId, 'userid' => $validateId,  'language' => $validateLangage])
+    ->name('p2ucollab_selected');
+
+Route::get('p2ucollab/{userid}', 'ProfileController@collablist')
+    ->where(['userid' => $validateId, 'language' => $validateLangage])
+    ->name('p2ucollab');
+
 
 Route::post('profile/editPitchbox', 'ProfileController@editPitchbox')->name('profileEditPitchbox');
 Route::post('profile/addInterest', 'ProfileController@addInterest')->name('profileAddInterest');
@@ -76,9 +93,25 @@ Route::get('community', 'CommunityController@index')->name('community');
 Route::get('searchProject', 'CommunityController@searchProject')->name('searchProject');
 Route::get('searchProfile', 'CommunityController@searchProfile')->name('searchProfile');
 
+// ***** Inbox *****
+Route::get('inbox', 'InboxController@index')->name('inbox');
+Route::get('inbox/accu2p/{userid}/{projectid}', 'InboxController@user_accept_project')
+    ->where(['userid' => $validateId, 'language' => $validateLangage, 'projectid' => $validateId])
+    ->name('user_accept_project');
+Route::get('inbox/decu2p/{userid}/{projectid}', 'InboxController@project_accept_user')
+    ->where(['userid' => $validateId, 'language' => $validateLangage, 'projectid' => $validateId])
+    ->name('project_accept_user');
+Route::get('inbox/accp2u/{userid}/{projectid}', 'InboxController@user_decline_project')
+    ->where(['userid' => $validateId, 'language' => $validateLangage, 'projectid' => $validateId])
+    ->name('user_decline_project');
+Route::get('inbox/decp2u/{userid}/{projectid}', 'InboxController@project_decline_user')
+    ->where(['userid' => $validateId, 'language' => $validateLangage, 'projectid' => $validateId])
+    ->name('project_decline_user');
+
 Route::get('swipe', 'PagesController@index')->name('swipe');
-Route::get('inbox', 'PagesController@index')->name('inbox');
+Route::get('inbox', 'InboxController@index')->name('inbox');
 Route::get('settings', 'PagesController@index')->name('settings');
+
 
 
 Auth::routes();

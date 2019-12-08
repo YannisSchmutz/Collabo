@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Model\Interest;
+use App\Http\Model\Like;
 use App\Http\Model\Project;
 use App\Http\ViewModel\ProjectDetailViewModel;
 use App\Http\ViewModel\ProjectListItemViewModel;
@@ -31,7 +32,7 @@ class ProjectsController extends Controller
             $projectListItemViewModel = new ProjectListItemViewModel();
             $projectListItemViewModel->setProject($project);
             $projectListItemViewModel->setIsRemovable(true);
-            if($project->pivot->permission == 'owner') {
+            if($project->pivot->permission === 'owner') {
                 array_push ( $ownedProjects, $projectListItemViewModel);
             }else {
                 array_push ( $relatedProjects, $projectListItemViewModel);
@@ -88,7 +89,7 @@ class ProjectsController extends Controller
         ]);
 
         $project = Project::find($id);
-        Gate::authorize('edit-project', $project);
+        Gate::authorize('is-projectowner', $project);
 
         $interestToAdd = Interest::find($request->interest_id_to_add);
         if ($interestToAdd == null){
@@ -116,7 +117,7 @@ class ProjectsController extends Controller
         ]);
 
         $project = Project::find($id);
-        Gate::authorize('edit-project', $project);
+        Gate::authorize('is-projectowner', $project);
 
         $interestToRemove = Interest::find($request->interest_id_to_remove);
         if ($interestToRemove == null){
@@ -188,7 +189,7 @@ class ProjectsController extends Controller
         ]);
 
         $project = Project::find($id);
-        Gate::authorize('edit-project', $project);
+        Gate::authorize('is-projectowner', $project);
         $file = $request->file('profilepic');
         if($file != null){
             $picname = $project->id.$file->getClientOriginalName();
@@ -209,7 +210,7 @@ class ProjectsController extends Controller
             'caption' => 'required'
         ]);
         $project = Project::find($id);
-        Gate::authorize('edit-project', $project);
+        Gate::authorize('is-projectowner', $project);
 
         $project->caption = $request->caption;
         $project->name = $request->fullname;
@@ -224,7 +225,7 @@ class ProjectsController extends Controller
         ]);
 
         $project = Project::find($id);
-        Gate::authorize('edit-project', $project);
+        Gate::authorize('is-projectowner', $project);
 
         $project->description = $request->descriptionArea;
         $project->save();
@@ -239,5 +240,27 @@ class ProjectsController extends Controller
         auth()->user()->projects()->detach($project);
         auth()->user()->save();
         return redirect()->back();
+    }
+
+    public function collab(Request $request, $lang, $projectid){
+        $user = auth()->user();
+        $project = Project::find($projectid);
+        if($project == null)
+            return redirect(app()->getLocale().'/community');
+
+        foreach($project->users as $projUser){
+            if($projUser->id === $user->id)
+                return redirect(app()->getLocale().'/community');
+        }
+
+        Like::firstOrCreate(['user_id' => $user->id,
+            'project_id' => $project->id,
+            ]);
+        Like::where(['user_id' => $user->id,
+            'project_id' => $project->id,
+        ])->update(['liked_by_user' => true,
+            'liked_by_project' => false,]);
+
+        return redirect(app()->getLocale().'/community');
     }
 }

@@ -19,8 +19,8 @@ class CreateLikesTable extends Migration
             // Use the natural composite key as primary (user_id, project_id)
             $table->primary(['user_id', 'project_id']);
 
-            $table->boolean('liked_by_user');
-            $table->boolean('liked_by_project');
+            $table->boolean('liked_by_user')->default(false);
+            $table->boolean('liked_by_project')->default(false);
 
             $table->timestamps();
         });
