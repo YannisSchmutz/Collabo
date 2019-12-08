@@ -1,0 +1,15 @@
+a01-html:           alles unter ./src/resources/views/*
+a02-css:            Styling with bootstrap classes unter ./src/resources/views/*
+a03-php1:           ?
+a04-php2:           Multilanguage gemacht und vieles mehr
+a05-forms:          Viele Forms beim erstellen/bearbeiten von Profilen/Projekten
+a06-javascript:     Toggle Forms ... Fw Validierung
+a07-mysql:          Model Klassen, Seeder, Migrations etc
+a08-sessions:       ?
+a09-php-oo:         Verschiedene Klassen
+a10-ajax:           Community: Paging und Suchfunktion
+a11-mvc:            Laravel wird als FW verwendet
+
+Fragen:
+Was kommt von FW, was von uns? Sollte das ersichtlich sein?
+Muss ersichtlich sein
