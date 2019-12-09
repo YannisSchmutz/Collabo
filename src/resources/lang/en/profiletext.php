@@ -17,10 +17,4 @@ return [
     'interests_placeholder' => 'User interests to add...',
     'interest_add_error' => 'Given interest could not be added',
     'interest_remove_error' => 'Given interest could not be removed',
-    'members' => 'Members',
-    'permission' => 'Permission',
-    'owner' => 'Owner',
-    'manager' => 'Manager (Administration, Development)',
-    'reporter' => 'Reporter (Development)',
-    'readonly' => 'Read only',
 ];

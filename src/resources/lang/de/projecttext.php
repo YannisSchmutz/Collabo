@@ -20,5 +20,9 @@ return [
     'create_new_project' => 'Neues Projekt erstellen',
     'interest_add_error' => 'Interesse konnte nicht hinzugefügt werden',
     'interest_remove_error' => 'Interesse konnte nicht entfehrnt werden',
-
+    'members' => 'Mitglieder',
+    'permission' => 'Berechtigung',
+    'owner' => 'Manager',
+    'readonly' => 'Mitarbeiter',
+    'missing_owner_permission' => 'Speichern fehlgeschlagen. Es wurde kein Manager definiert.',
 ];

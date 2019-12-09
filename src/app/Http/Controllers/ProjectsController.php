@@ -69,8 +69,6 @@ class ProjectsController extends Controller
 
         $memberRoles = [
             'owner',
-            'manager',
-            'reporter',
             'readonly'
         ];
 
@@ -242,7 +240,32 @@ class ProjectsController extends Controller
     }
 
     public function editPermissions(Request $request, $lang, $id){
+        $project = Project::find($id);
+        Gate::authorize('edit-project', $project);
 
+        $postData = array_diff(request()->all(), request()->query());
+        $valid = sizeof(
+            array_filter(
+                $postData,
+                function($role, $id){
+                    return $role == 'owner';
+                 },
+                ARRAY_FILTER_USE_BOTH
+            )
+        ) > 0;
+
+        if(!$valid){
+            return redirect()->back()->with('errorMessages',
+                [__('projecttext.missing_owner_permission')]);
+        }
+
+        foreach($postData as $id=>$role){
+            if($id == '_token'){continue;}
+            $user = $project->users()->find($id);
+            $user->pivot->permission = $role;
+            $user->pivot->save();
+        }
+        return redirect()->back();
     }
 
     public function unsubscribe(Request $request, $lang, $id){

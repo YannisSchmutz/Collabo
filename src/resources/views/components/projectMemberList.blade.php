@@ -1,6 +1,6 @@
 <form action="{{$routeName}}" method="post" id="permissionsForm" class="card mt-4 mb-4 p-2">
     @csrf
-    <h3 class="card-title">@lang('profiletext.members')</h3>
+    <h3 class="card-title">@lang('projecttext.members')</h3>
     <ul class="form-group p-0">
         @foreach($members as $profile)
             <li class="list-group-item container">
@@ -12,14 +12,14 @@
                         <h5 class="m-0">{{$profile->name}}</h5>
                         <div class="row form-group mt-4 mb-0 ml-0 mr-0">
                             <label for="{{$profile->id}}" class="control-label">
-                                @lang('profiletext.permission'):
+                                @lang('projecttext.permission'):
                             </label>
                             <select name="{{$profile->id}}" class="form-control">
                                 @foreach($permissions as $permission)
                                     <option
                                         value="{{$permission}}"
                                         @if($permission == $profile->pivot->permission) selected="selected" @endif>
-                                        @lang('profiletext.'.$permission)
+                                        @lang('projecttext.'.$permission)
                                     </option>
                                 @endforeach
                             </select>
