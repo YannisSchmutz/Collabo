@@ -6,7 +6,8 @@
         <div class="col-md-3">
             @component('components/pitchBox', ['picPath' =>$data->getPicPath(), 'routeName' => route('profileEditPitchbox', app()->getLocale()),
                                                'langFile' => 'profiletext',
-                                               'collabRoute' => route('p2ucollab', [app()->getLocale(), $data->getId()])])
+                                               'collabRoute' => route('p2ucollab', [app()->getLocale(), $data->getId()]),
+                                               'showCollabButton' => $data->getId() !== null && $data->getId() != auth()->user()->id])
                 {{$data->getPitch()}}
             @endcomponent
         </div>
