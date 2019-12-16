@@ -148,7 +148,7 @@ class ProjectDetailViewModel
     /**
      * @return mixed
      */
-    public function GetMembers()
+    public function getMembers()
     {
         return $this->members;
     }
