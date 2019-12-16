@@ -24,5 +24,5 @@ return [
     'permission' => 'Berechtigung',
     'owner' => 'Manager',
     'readonly' => 'Mitarbeiter',
-    'missing_owner_permission' => 'Speichern fehlgeschlagen. Es wurde kein Manager definiert.',
+    'only_one_owner_permission' => 'Speichern fehlgeschlagen. Es muss genau ein Manager definiert sein.',
 ];

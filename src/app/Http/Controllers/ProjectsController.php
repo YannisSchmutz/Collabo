@@ -252,11 +252,11 @@ class ProjectsController extends Controller
                  },
                 ARRAY_FILTER_USE_BOTH
             )
-        ) > 0;
+        ) == 1;
 
         if(!$valid){
             return redirect()->back()->with('errorMessages',
-                [__('projecttext.missing_owner_permission')]);
+                [__('projecttext.only_one_owner_permission')]);
         }
 
         foreach($postData as $id=>$role){

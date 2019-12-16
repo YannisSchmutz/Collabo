@@ -24,5 +24,5 @@ return [
     'permission' => 'Permission',
     'owner' => 'Manager',
     'readonly' => 'Contributor',
-    'missing_owner_permission' => 'Save failed. No manager was defined'
+    'only_one_owner_permission' => 'Save failed. Exactly one manager should be definied'
 ];
