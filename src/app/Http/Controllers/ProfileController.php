@@ -154,8 +154,6 @@ class ProfileController extends Controller
     }
 
     public function editCaption(Request $request){
-        Gate::authorize('edit-profile', $request->user());
-
         Gate::authorize('is-auth-user', $request->user());
         //Todo: Send error-message to frontend if this fails
         $this->validate($request, [
