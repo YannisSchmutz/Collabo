@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Model\Interest;
 use App\Http\Model\Like;
 use App\Http\Model\Project;
+use App\Http\Model\UserProject;
 use App\Http\ViewModel\ProjectDetailViewModel;
 use App\Http\ViewModel\ProjectListItemViewModel;
 use App\Http\ViewModel\ProjectsViewModel;
@@ -67,6 +68,11 @@ class ProjectsController extends Controller
             }
         }
 
+        $memberRoles = [
+            'owner',
+            'readonly'
+        ];
+
         $projectDetailViewModel = new ProjectDetailViewModel();
         $projectDetailViewModel->setId($project->id);
         $projectDetailViewModel->setName($project->name);
@@ -76,6 +82,8 @@ class ProjectsController extends Controller
         $projectDetailViewModel->setPicPath($project->project_picture);
         $projectDetailViewModel->setProjectInterests($projectInterests);
         $projectDetailViewModel->setPossibleInterestsToAdd($possibleInterestsToAdd);
+        $projectDetailViewModel->setMembers($project->users);
+        $projectDetailViewModel->setPossiblePermissions($memberRoles);
 
 
         return view('pages.project_detail')->with([
@@ -230,6 +238,35 @@ class ProjectsController extends Controller
         $project->description = $request->descriptionArea;
         $project->save();
         return redirect(app()->getLocale().'/projects/'.$id.'/detail');
+    }
+
+    public function editPermissions(Request $request, $lang, $id){
+        $project = Project::find($id);
+        Gate::authorize('edit-project', $project);
+
+        $postData = array_diff(request()->all(), request()->query());
+        $valid = sizeof(
+            array_filter(
+                $postData,
+                function($role, $id){
+                    return $role == 'owner';
+                 },
+                ARRAY_FILTER_USE_BOTH
+            )
+        ) == 1;
+
+        if(!$valid){
+            return redirect()->back()->with('errorMessages',
+                [__('projecttext.only_one_owner_permission')]);
+        }
+
+        foreach($postData as $id=>$role){
+            if($id == '_token'){continue;}
+            $user = $project->users()->find($id);
+            $user->pivot->permission = $role;
+            $user->pivot->save();
+        }
+        return redirect()->back();
     }
 
     public function unsubscribe(Request $request, $lang, $id){

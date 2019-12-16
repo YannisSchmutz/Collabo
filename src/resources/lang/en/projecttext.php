@@ -20,5 +20,9 @@ return [
     'create_new_project' => 'Create new project',
     'interest_add_error' => 'Given interest could not be added',
     'interest_remove_error' => 'Given interest could not be removed',
-
+    'members' => 'Members',
+    'permission' => 'Permission',
+    'owner' => 'Manager',
+    'readonly' => 'Contributor',
+    'only_one_owner_permission' => 'Save failed. Exactly one manager should be definied'
 ];

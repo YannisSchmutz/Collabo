@@ -21,7 +21,7 @@ class CreateUsersProjectsTable extends Migration
 
             // TODO: Use own table for permissions eventually..?
             $table->enum('permission',
-                ['readonly', 'reporter', 'manager', 'owner'])->default('readonly');
+                ['readonly', 'owner'])->default('readonly');
             $table->timestamps();
         });
     }

@@ -14,6 +14,8 @@ class ProjectDetailViewModel
     private $description;
     private $projectInterests;
     private $possibleInterestsToAdd;
+    private $members;
+    private $possiblePermissions;
 
     /**
      * @return mixed
@@ -152,10 +154,26 @@ class ProjectDetailViewModel
     }
 
     /**
-     * @param mixed $projects
+     * @param mixed $members
      */
     public function setMembers($members): void
     {
         $this->members = $members;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPossiblePermissions()
+    {
+        return $this->possiblePermissions;
+    }
+
+    /**
+     * @param mixed $possiblePermissions
+     */
+    public function setPossiblePermissions($possiblePermissions): void
+    {
+        $this->possiblePermissions = $possiblePermissions;
     }
 }
