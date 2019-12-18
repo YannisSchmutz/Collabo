@@ -3,7 +3,9 @@
     <i class="fas fa-edit ml-auto mr-2 mt-2" onclick="togglePitchForm()"></i>
     <p class="card-text p-2">{{$slot}}</p>
 
-    <a href="{{$collabRoute}}" class="ml-2 mr-2 btn btn-primary" role="button">Collab!</a>
+    @if($showCollabButton)
+        <a href="{{$collabRoute}}" class="ml-2 mr-2 btn btn-primary" role="button">Collab!</a>
+    @endIf
 </div>
 <form action="{{$routeName}}" method="post" class="hiddenForm" id="pitchboxForm" enctype="multipart/form-data">
     @csrf
