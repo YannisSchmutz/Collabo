@@ -7,7 +7,8 @@
             <div class="col-md-3">
                 @component('components/pitchBox', ['picPath' =>$data->getPicPath(), 'routeName' =>route('projectEditPitchbox', [app()->getLocale(), 'id' => $data->getId()]),
                                                    'langFile' => 'projecttext',
-                                                   'collabRoute' => route('u2pcollab', [app()->getLocale(), 'projectid' => $data->getId()])])
+                                                   'collabRoute' => route('u2pcollab', [app()->getLocale(), 'projectid' => $data->getId()]),
+                                                   'showCollabButton' => $data->getId() !== null])
                     {{$data->getPitch()}}
                 @endcomponent
             </div>
