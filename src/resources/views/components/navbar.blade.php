@@ -26,16 +26,10 @@
                         <a class="nav-link" href="{{ route('projects', app()->getLocale()) }}">{{ __('Projects') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('swipe', app()->getLocale()) }}">{{ __('Swipe') }}</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('community', app()->getLocale()) }}">{{ __('Community') }}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('inbox', app()->getLocale()) }}">{{ __('Inbox') }}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('settings', app()->getLocale()) }}">{{ __('Settings') }}</a>
                     </li>
                     <li>
                         <a class="nav-link" href="#" onclick="event.preventDefault();
