@@ -19,9 +19,11 @@ services:
       - mysql
     networks:
       - laravel
+    working_dir: /var/www
 
   mysql:
     image: mysql:5.7.22
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
     container_name: mysql
     restart: unless-stopped
     tty: true

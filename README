@@ -11,3 +11,80 @@ Create and start containers (add -d as parameter to run containers in the backgr
 
 Install vendor folder:
     docker-compose exec php composer install
+
+Templating stuff
+----------------
+Setup npm (Node Package Manager) in source folder:
+    npm install
+
+Compile CSS and JS files to public folder:
+    One time:   npm run dev
+    Continuous: npm run watch
+
+
+
+
+MYSQL
+-----
+Access container:
+    docker-compose exec mysql bash
+    mysql -u homestead -p
+
+Or access mysql-prompt directly:
+    mysql -h 127.0.0.1 -P 3306 -u homestead -p
+
+In mysql prompt:
+    use homestead;
+
+
+PHP artisan
+-----------
+cd src/
+
+Display all available routes:
+    php artisan route:list
+
+Create controller (including handy functions )
+    php artisan make:controller ProjectsController --resource
+
+Create Model (inclusive migration)
+    php artisan make:model Project -m
+
+CLI to play with models (has to be executed in container!):
+    php artisan tinker
+
+
+Migrate
+-------
+Enter php-container (The migration has to be executed in the container, not on your local machine):
+    docker-compose exec php sh
+Go to /var/www/
+    cd ..
+Migrate (this creates all tables defined by the migrations scripts)
+    php artisan migrate
+If you made some changes in your migration scripts, use:
+    php artisan migrate:refresh
+
+
+Miscellaneous
+-------------
+Be able to use forms:
+    docker-compose exec php composer require "laravelcollective/html"
+
+
+Authentication
+--------------
+php artisan make:auth
+
+
+
+Create fake data
+----------------
+Create a Model factory for an already existing model:
+    php artisan make:factory ProjectFactory --model="App\Project"
+Create a seeder
+    php artisan make:seeder ProjectTableSeeder
+
+Seed the data. (You probably have to do a composer install before)
+This command has to be executed in the container.
+    php artisan migrate --seed

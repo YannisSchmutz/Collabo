@@ -25,6 +25,16 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('is-auth-user', function ($auth, $user) {
+            return $user->id === $auth->id;
+        });
+
+        Gate::define('is-projectowner', function ($user, $project) {
+            foreach($project->users as $projectuser){
+                if($projectuser->pivot->permission === 'owner' && $projectuser->id === $user->id)
+                    return true;
+            }
+            return false;
+        });
     }
 }

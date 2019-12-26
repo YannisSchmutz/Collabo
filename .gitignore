@@ -1,18 +1,19 @@
-vendor/
-node_modules/
-npm-debug.log
+src/vendor/
+src/node_modules/
+src/npm-debug.log
 
 # Laravel 4 specific
-bootstrap/compiled.php
-app/storage/
+src/bootstrap/compiled.php
+src/app/storage/
 
 # Laravel 5 & Lumen specific
-public/storage
-public/hot
-storage/*.key
+src/bootstrap/cache/
+src/storage
+src/hot
+src/storage/*.key
 .env.*.php
 .env.php
-#.env
+.env
 Homestead.yaml
 Homestead.json
 
