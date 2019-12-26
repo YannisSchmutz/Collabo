@@ -1,15 +1,40 @@
 a01-html:           alles unter ./src/resources/views/*
 a02-css:            Styling with bootstrap classes unter ./src/resources/views/*
-a03-php1:           ?
-a04-php2:           Multilanguage gemacht und vieles mehr
+a03-php1:           dynamisches Navigationsmenü.. Viele funktionen in ./src/app/Controllers/*
+a04-php2:           Multilanguage gemacht und vieles mehr, siehe ./src/
 a05-forms:          Viele Forms beim erstellen/bearbeiten von Profilen/Projekten
-a06-javascript:     Toggle Forms ... Fw Validierung
-a07-mysql:          Model Klassen, Seeder, Migrations etc
-a08-sessions:       ?
-a09-php-oo:         Verschiedene Klassen
+a06-javascript:     Toggle Forms und Bootstrap funktionalitäten
+a07-mysql:          Model Klassen, Seeder, Migrations etc. Wurde alles selbst erstellt, unter ./src/database
+a08-sessions:       Das Login funktioniert mit Sessions. (Wird durch Framework gemacht)
+a09-php-oo:         Verschiedene Klassen in ./src/app/Controllers/etc. und an vielen anderen Orten
 a10-ajax:           Community: Paging und Suchfunktion
 a11-mvc:            Laravel wird als FW verwendet
+a12-responsive:     Es wird Bootstrap verwendet
 
-Fragen:
-Was kommt von FW, was von uns? Sollte das ersichtlich sein?
-Muss ersichtlich sein
+Framework Klassen
+./src/bootstrap/*
+./src/config/*
+./src/externals/*
+
+./src/app/Providers/AppServiceProvider.php
+./src/app/Providers/BroadcastServiceProvider.php
+./src/app/Providers/EventServiceProvider.php
+./src/app/Providers/RouteServiceProvider.php
+
+./src/app/Exceptions/Handler.php
+./src/app/Console/Kernel.php
+./src/app/Http/Kernel.php
+
+./src/app/Middleware/Authenticate.php
+./src/app/Middleware/CheckForMaintananceMode.php
+./src/app/Middleware/EncryptCookies.php
+./src/app/Middleware/RedirectIfAuthenticated.php
+./src/app/Middleware/TrimStrings.php
+./src/app/Middleware/TrustProxies.php
+./src/app/Middleware/VerifyCsrfToken.php
+
+./src/app/Controllers/Controller.php
+
+//Anmerkung: Die Auth Klassen wurden vom FW generiert und angepasst
+./src/app/Controllers/Auth/*
+

@@ -23,9 +23,9 @@ class UsersTableSeeder extends Seeder
         ]);
         DB::table('users')->insert([
             'name' => 'Gian Demarmels',
-            'caption' => 'Security | F# | Fönkschönöl progrämming',
-            'email' => 'gian@demarmels.com',
-            'password' => bcrypt('12345678'),
+            'caption' => 'Security | F# | Functional Programming',
+            'email' => 'admin',
+            'password' => bcrypt('supersecret!'),
             'pitch' => 'Gian pitch',
             'description' => 'Gian description',
             'profile_picture' => '/pictures/gian.png',
