@@ -88,3 +88,6 @@ Create a seeder
 Seed the data. (You probably have to do a composer install before)
 This command has to be executed in the container.
     php artisan migrate --seed
+    
+    
+On path error: https://stackoverflow.com/questions/38483837/please-provide-a-valid-cache-path
